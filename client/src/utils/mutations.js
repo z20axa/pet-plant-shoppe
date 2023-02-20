@@ -24,7 +24,7 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_THOUGHT = gql`
+export const ADD_PLANT = gql`
   mutation addThought($thoughtText: String!) {
     addThought(thoughtText: $thoughtText) {
       _id
@@ -50,6 +50,7 @@ export const ADD_COMMENT = gql`
         _id
         commentText
         createdAt
+
       }
     }
   }
