@@ -1,0 +1,23 @@
+{
+  "name": "upgraded",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd client && cross-env CI=true npx react-scripts test --env=jsdom && cd ../server && cross-env NODE_ENV=test npx jest",
+    "test:client": "cd client && yarn test",
+    "test:server": "cd server && yarn test",
+    "start": "cross-env NODE_ENV=production node server/server.js --ignore client",
+    "develop": "concurrently \"cd server && yarn run develop\" \"cd client && yarn start\"",
+    "install": "cd server && yarn install && cd ../client && yarn install",
+    "seed": "cd server && yarn run seed",
+    "build": "cd client && cross-env NODE_ENV=production yarn build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "cross-env": "^7.0.3"
+  }
+}
