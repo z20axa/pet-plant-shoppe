@@ -50,6 +50,7 @@ export const ADD_COMMENT = gql`
         _id
         commentText
         createdAt
+
       }
     }
   }
