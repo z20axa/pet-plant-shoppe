@@ -2,7 +2,7 @@ require('dotenv').config();
 // console.log(process.env.NODE_ENV);
 const db = require('../config/connection');
 
-const { seedDatabase } = require("./seed");
+const { seedDatabase } = require("./plantSeed");
 
 const run = async () => {
   await seedDatabase();

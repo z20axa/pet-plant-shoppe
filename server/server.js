@@ -2,7 +2,7 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const db = require('./config/connection'); 
-const { seedDatabase } = require('./seeders/seed');
+// const { seedDatabase } = require('./seeders/seed');
 
 const { ApolloServer } = require('@apollo/server');
 const { authMiddleware } = require('./utils/auth');
@@ -26,21 +26,21 @@ if(process.env.NODE_ENV === 'production'){
 
 // if not production, enable seed, 
 // if in production, only enable seed when the process.env.ENABLE_SEED var is true
-if(process.env.NODE_ENV !== 'production' || process.env.ENABLE_SEED === 'true'){
-  app.post('/seedDatabase', async (req, res) => {
-    const result = await seedDatabase();
-    if(result.message === "completed seed"){
-      res.status(200);
-    }
-    else{
-      res.status(500);
-    }
-    res.json(result);
-  });
-  app.delete('/seedDatabase', async (req, res) => {
-    res.status(200).json(result);
-  });
-}
+// if(process.env.NODE_ENV !== 'production' || process.env.ENABLE_SEED === 'true'){
+//   app.post('/seedDatabase', async (req, res) => {
+//     const result = await seedDatabase();
+//     if(result.message === "completed seed"){
+//       res.status(200);
+//     }
+//     else{
+//       res.status(500);
+//     }
+//     res.json(result);
+//   });
+//   app.delete('/seedDatabase', async (req, res) => {
+//     res.status(200).json(result);
+//   });
+// }
 
 const server = new ApolloServer({
   typeDefs,

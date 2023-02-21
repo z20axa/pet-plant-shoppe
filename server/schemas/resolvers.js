@@ -1,31 +1,60 @@
 
-const { User, Thought } = require('../models');
+const { User, Plant } = require('../models');
 const { signToken } = require('../utils/auth');
+
+const userSeeds = require("../seeders/userSeeds.json");
+const plantSeeds = require("../seeders/plantsSeeds.json");
+//Deleted  
+// const {AuthenticationError } = require('apollo-server-express')
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('thoughts');
+      return User.find().populate('plant');
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('thoughts');
+      return User.findOne({ username }).populate('plant');
     },
-    thoughts: async (parent, { username }) => {
+    plants: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Thought.find(params).sort({ createdAt: -1 });
+      return Plant.find(params).sort({ createdAt: -1 });
     },
-    thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+    plant: async (parent, { plantId }) => {
+      return Plant.findOne({ _id: plantId });
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
+        return User.findOne({ _id: context.user._id }).populate('plant');
       }
-      throw new Error('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in -test1!');
     },
   },
 
   Mutation: {
+    seed: async()=>{
+      try {
+        await Plant.deleteMany({});
+        await User.deleteMany({});
+    
+        await User.create(userSeeds);
+    
+        for (let i = 0; i < plantSeeds.length; i++) {
+          const { _id, plantAuthor } = await Plant.create(plantSeeds[i]);
+          const user = await User.findOneAndUpdate(
+            { username: plantAuthor },
+            {
+              $addToSet: {
+                plant: _id,
+              },
+            }
+          );
+        }
+        return "all done!";
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
@@ -35,42 +64,44 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new Error('No user found with this email address');
+        throw new AuthenticationError('No user found with this email address');
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new Error('Incorrect credentials');
+        throw new AuthenticationError('Incorrect credentials');
       }
 
       const token = signToken(user);
-
+// login that is going to create and return a token as part of the authentication protocol
       return { token, user };
     },
-    addThought: async (parent, { thoughtText }, context) => {
+    addPlant: async (parent, { name }, context) => {
       if (context.user) {
-        const thought = await Thought.create({
-          thoughtText,
-          thoughtAuthor: context.user.username,
+        const plant = await Plant.create({
+          name,
+          plantAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { thoughts: thought._id } }
+          { $addToSet: { plants: plant._id } }
         );
 
-        return thought;
+        return plant;
       }
-      throw new Error('You need to be logged in!');
+     
+     // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
+     throw new Error('You need to be logged in -test2!');
     },
-    addComment: async (parent, { thoughtId, commentText }, context) => {
+    addComment: async (parent, { plantId, comment_text }, context) => {
       if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
+        return Plant.findOneAndUpdate(
+          { _id: plantId },
           {
             $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
+              comments: { comment_text, comment_author: context.user.username },
             },
           },
           {
@@ -79,40 +110,45 @@ const resolvers = {
           }
         );
       }
-      throw new Error('You need to be logged in!');
+      throw new Error('You need to be logged in -test3!');
     },
-    removeThought: async (parent, { thoughtId }, context) => {
+    removePlant: async (parent, { plantId }, context) => {
       if (context.user) {
-        const thought = await Thought.findOneAndDelete({
-          _id: thoughtId,
-          thoughtAuthor: context.user.username,
+        const plant = await Plant.findOneAndDelete({
+          _id: plantId,
+          plantAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { thoughts: thought._id } }
+          { $pull: { plant: plant._id } }
         );
 
-        return thought;
+        return plant;
       }
-      throw new Error('You need to be logged in!');
+      //Review this part that was returning an error even after being logged in in Anthony's template
+      throw new AuthenticationError('You need to be logged in test-4!');
     },
-    removeComment: async (parent, { thoughtId, commentId }, context) => {
+
+    //Checking for the context to add the user
+    /**When we create the token, it identifies the user which creates a context and it is created by the authentication Middleware inside auth.js; once it verifies the user, it will put it as part of the request for the user   */
+    removeComment: async (parent, { plantId, commentId }, context) => {
       if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
+        return Plant.findOneAndUpdate(
+          { _id: plantId },
           {
             $pull: {
               comments: {
                 _id: commentId,
-                commentAuthor: context.user.username,
+                comment_author: context.user.username,
               },
             },
           },
           { new: true }
         );
       }
-      throw new Error('You need to be logged in!');
+      // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
+      throw new Error('You need to be logged in -test5!');
     },
   },
 };

@@ -20,10 +20,10 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  thoughts: [
+ plant: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Thought',
+      ref: 'Plant',
     },
   ],
 });
@@ -63,7 +63,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 
 const User = model('User', userSchema);
-
+ //This unit Testing for different parts of the application
 if(process.env.NODE_ENV === "test"){
   module.exports = { 
     User,
