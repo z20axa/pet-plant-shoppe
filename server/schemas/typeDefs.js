@@ -44,6 +44,9 @@ const typeDefs = gql`
     plants(username: String): [Plant]
     plant(plantId: ID!): Plant
     me: User
+    lowLight: [Plant]
+    animalSafe: [Plant]
+    specificPlant(name:String):[Plant]
   }
 
   type Mutation {

@@ -1,19 +1,18 @@
-
-const { User, Plant } = require('../models');
-const { signToken } = require('../utils/auth');
+const { User, Plant } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const userSeeds = require("../seeders/userSeeds.json");
 const plantSeeds = require("../seeders/plantsSeeds.json");
-//Deleted  
+//Deleted
 // const {AuthenticationError } = require('apollo-server-express')
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('plant');
+      return User.find().populate("plant");
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('plant');
+      return User.findOne({ username }).populate("plant");
     },
     plants: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -24,20 +23,23 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('plant');
+        return User.findOne({ _id: context.user._id }).populate("plant");
       }
-      throw new AuthenticationError('You need to be logged in -test1!');
+      throw new AuthenticationError("You need to be logged in -test1!");
     },
+    lowLight: async () => Plant.find({ light: "low light" }),
+    specificPlant: async (_, { name }) =>
+      Plant.find({ name: new RegExp(name) , light: "low light"}),
   },
 
   Mutation: {
-    seed: async()=>{
+    seed: async () => {
       try {
         await Plant.deleteMany({});
         await User.deleteMany({});
-    
+
         await User.create(userSeeds);
-    
+
         for (let i = 0; i < plantSeeds.length; i++) {
           const { _id, plantAuthor } = await Plant.create(plantSeeds[i]);
           const user = await User.findOneAndUpdate(
@@ -64,17 +66,17 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('No user found with this email address');
+        throw new AuthenticationError("No user found with this email address");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError("Incorrect credentials");
       }
 
       const token = signToken(user);
-// login that is going to create and return a token as part of the authentication protocol
+      // login that is going to create and return a token as part of the authentication protocol
       return { token, user };
     },
     addPlant: async (parent, { name }, context) => {
@@ -91,9 +93,9 @@ const resolvers = {
 
         return plant;
       }
-     
-     // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
-     throw new Error('You need to be logged in -test2!');
+
+      // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
+      throw new Error("You need to be logged in -test2!");
     },
     addComment: async (parent, { plantId, comment_text }, context) => {
       if (context.user) {
@@ -110,7 +112,7 @@ const resolvers = {
           }
         );
       }
-      throw new Error('You need to be logged in -test3!');
+      throw new Error("You need to be logged in -test3!");
     },
     removePlant: async (parent, { plantId }, context) => {
       if (context.user) {
@@ -127,7 +129,7 @@ const resolvers = {
         return plant;
       }
       //Review this part that was returning an error even after being logged in in Anthony's template
-      throw new AuthenticationError('You need to be logged in test-4!');
+      throw new AuthenticationError("You need to be logged in test-4!");
     },
 
     //Checking for the context to add the user
@@ -148,7 +150,7 @@ const resolvers = {
         );
       }
       // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
-      throw new Error('You need to be logged in -test5!');
+      throw new Error("You need to be logged in -test5!");
     },
   },
 };
