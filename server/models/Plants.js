@@ -22,6 +22,11 @@ const plantSchema = new Schema({
     required: true,
   },
 
+ inStore : {
+    type: Boolean,
+    required: true
+  },
+
   animalSafe: {
     type: String,
     required: true,
