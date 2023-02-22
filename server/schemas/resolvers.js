@@ -21,6 +21,12 @@ const resolvers = {
     plant: async (parent, { plantId }) => {
       return Plant.findOne({ _id: plantId });
     },
+
+  // query to separate only plants sold in store in DB
+    inStore: async (parent, { name }) => {
+      return Plant.find({ inStore: "true"});
+    },
+
     me: async (parent, args, context) => {
       //check to see if user is logged in
       if (context.user) {
@@ -28,9 +34,27 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in -test1!");
     },
-    // lowLight: async () => Plant.find({ light: "low light" }),
-    specificPlant: async (_, { name }) =>
-      Plant.find({ name: new RegExp(name) , animalSafe: "low light"}),
+    // search for plants by animal - cats dogs or both
+    
+    specificPlantA: async (_, { name, animalSafe }) =>{
+    const animalSafeValue = typeof animalSafe!= undefined ?{"$regex": new RegExp(animalSafe),"$options": "i"}: "cats/dogs";
+    const safeOrnot = await Plant.find({
+    name: { "$regex": new RegExp(name),"$options": "i"}, 
+    animalSafe: animalSafeValue
+    });
+    return safeOrnot;
+
+     
+  },
+
+  
+// search for plants safety by plant name - needs to be improved
+
+
+  specificPlantS: async (_, { name }) => {
+    Plant.find({ name: new RegExp(name) , animalSafe: $animalSafe})
+},
+
   },
 
   Mutation: {
@@ -80,7 +104,7 @@ const resolvers = {
       // login that is going to create and return a token as part of the authentication protocol
       return { token, user };
     },
-    addPlant: async (parent, { name }, context) => {
+    addFavorite: async (parent, { name }, context) => {
       if (context.user) {
         const plant = await Plant.create({
           name,
@@ -115,7 +139,7 @@ const resolvers = {
       }
       throw new Error("You need to be logged in -test3!");
     },
-    removePlant: async (parent, { plantId }, context) => {
+    removeFavorite: async (parent, { plantId }, context) => {
       if (context.user) {
         const plant = await Plant.findOneAndDelete({
           _id: plantId,

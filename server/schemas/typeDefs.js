@@ -24,6 +24,7 @@ const typeDefs = gql`
     light: String,
     air: String,
     comments: [Comment]!
+    inStore: String!
   }
 
   type Comment {
@@ -44,19 +45,21 @@ const typeDefs = gql`
     plants(username: String): [Plant]
     plant(plantId: ID!): Plant
     me: User
-    lowLight: [Plant]
-    animalSafe: [Plant]
-    specificPlant(name:String):[Plant]
+    inStore (inStore: String!):[Plant]
+    specificPlantA(name:String, animalSafe: String!):[Plant]
+    specificPlantS(name:String):[Plant]
+   
+    
   }
-
+  
   type Mutation {
     seed: String
     addUser(username: String!, email: String!, password: String!): Auth
     # this login matches the token in the resolvers.js
     login(email: String!, password: String!): Auth
-    addPlant(name: String!): Plant
+    addFavorite(name: String!): Plant
+    removeFavorite(plantId: ID!): Plant
     addComment(plantId: ID!, comment_text: String!): Plant
-    removePlant(plantId: ID!): Plant
     removeComment(plantId: ID!, commentId: ID!): Plant
     
     #purchase plant needs to be created 

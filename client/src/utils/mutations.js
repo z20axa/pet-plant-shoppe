@@ -34,3 +34,4 @@ mutation addComment ($plantId: ID!, $commentText: String!) {
   }
 }
 `;
+
