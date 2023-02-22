@@ -28,9 +28,9 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in -test1!");
     },
-    lowLight: async () => Plant.find({ light: "low light" }),
+    // lowLight: async () => Plant.find({ light: "low light" }),
     specificPlant: async (_, { name }) =>
-      Plant.find({ name: new RegExp(name) , light: "low light"}),
+      Plant.find({ name: new RegExp(name) , animalSafe: "low light"}),
   },
 
   Mutation: {
