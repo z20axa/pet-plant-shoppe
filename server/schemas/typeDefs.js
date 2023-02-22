@@ -58,11 +58,14 @@ const typeDefs = gql`
     addComment(plantId: ID!, comment_text: String!): Plant
     removePlant(plantId: ID!): Plant
     removeComment(plantId: ID!, commentId: ID!): Plant
-    #purchase plant
-    purchase(plantId: ID!): Plant
+    
+    #purchase plant needs to be created 
     #Add favorite
-    addFavorite(plantId: ID!): Plant
+    #Remove Favorite
+ 
   }
+
+
 `;
 
 module.exports = typeDefs;
