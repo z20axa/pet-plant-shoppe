@@ -3,8 +3,8 @@ const { signToken } = require("../utils/auth");
 
 const userSeeds = require("../seeders/userSeeds.json");
 const plantSeeds = require("../seeders/plantsSeeds.json");
-//Deleted
-// const {AuthenticationError } = require('apollo-server-express')
+
+const {AuthenticationError } = require('apollo-server-express')
 
 const resolvers = {
   Query: {
@@ -22,6 +22,7 @@ const resolvers = {
       return Plant.findOne({ _id: plantId });
     },
     me: async (parent, args, context) => {
+      //check to see if user is logged in
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("plant");
       }
@@ -95,7 +96,7 @@ const resolvers = {
       }
 
       // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
-      throw new Error("You need to be logged in -test2!");
+      throw new Error("You need to be logged in!");
     },
     addComment: async (parent, { plantId, comment_text }, context) => {
       if (context.user) {
@@ -152,6 +153,8 @@ const resolvers = {
       // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
       throw new Error("You need to be logged in -test5!");
     },
+
+    //
   },
 };
 
