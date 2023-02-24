@@ -4,7 +4,9 @@ const { signToken } = require("../utils/auth");
 const userSeeds = require("../seeders/userSeeds.json");
 const plantSeeds = require("../seeders/plantsSeeds.json");
 
-const { AuthenticationError } = require("apollo-server-express");
+
+const { AuthenticationError } = require('apollo-server-express')
+
 
 const resolvers = {
   Query: {
@@ -18,21 +20,52 @@ const resolvers = {
       return User.findOne({ username }).populate("plant");
     },
 
-    ////???? - sorts by time of creation - could use it in comment section
+
+    // get stripe key
+    getStripeKey: () => {
+      return {
+        key: process.env.bestripeKey
+      }
+
+    },
+
+    // need to revise and finish it
+    order: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'orders.products',
+          populate: 'category'
+        });
+
+        return user.orders.id(_id);
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
+
+
+    // need to add and finish it
+    // checkout:
+
+
+
+
+      ////???? - sorts by time of creation - could use it in comment section
     plants: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Plant.find(params).sort({ createdAt: -1 });
-    },
 
-    ///finding one plant by plant id
-    plant: async (parent, { plantId }) => {
-      return Plant.findOne({ _id: plantId });
-    },
+///finding one plant by plant id
+plant: async (parent, { plantId }) => {
+  return Plant.findOne({ _id: plantId });
+},
 
-    // query to separate only plants sold in store in DB
+ // query to separate only plants sold in store in DB
     inStore: async (parent, { name }) => {
       return Plant.find({  inStore: true});
     },
+
 
     // logged in user
 
@@ -43,51 +76,60 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in -test1!");
     },
-    // search for plants by animal - cats dogs or both
 
-    specificPlantA: async (_, { name, animalSafe }) => {
-      const animalSafeValue =
-        typeof animalSafe != undefined
-          ? { $regex: new RegExp(animalSafe), $options: "i" }
-          : "cats/dogs";
-      const safeOrnot = await Plant.find({
-        name: { $regex: new RegExp(name), $options: "i" },
-        animalSafe: animalSafeValue,
-      });
-      return safeOrnot;
-    },
+      // search for plants by animal - cats dogs or both
 
-    // search for plants safety by plant name - needs to be improved
+      specificPlantA: async (_, { name, animalSafe }) => {
+        const animalSafeValue = typeof animalSafe != undefined ? { "$regex": new RegExp(animalSafe), "$options": "i" } : "cats/dogs";
+        const safeOrnot = await Plant.find({
+          name: { "$regex": new RegExp(name), "$options": "i" },
+          animalSafe: animalSafeValue
+        });
+        return safeOrnot;
 
-    specificPlantS: async (_, { name }) =>
-      Plant.find({ name: new RegExp(name) }),
+
+      },
+
+
+        // search for plants safety by plant name - needs to be improved
+
+
+        specificPlantS: async (_, { name }) => {
+          Plant.find({ name: new RegExp(name) })
+        },
+
+
   },
 
-  Mutation: {
-    // seeding database
-    seed: async () => {
-      try {
-        await Plant.deleteMany({});
-        await User.deleteMany({});
+Mutation: {
 
-        await User.create(userSeeds);
+  // seeding database
+  seed: async () => {
+    try {
+      await Plant.deleteMany({});
+      await User.deleteMany({});
 
-        for (let i = 0; i < plantSeeds.length; i++) {
-          const { _id, plantAuthor } = await Plant.create(plantSeeds[i]);
-          const user = await User.findOneAndUpdate(
-            { username: plantAuthor },
-            {
-              $addToSet: {
-                plant: _id,
-              },
-            }
-          );
-        }
-        return "all done!";
-      } catch (err) {
-        console.error(err);
+
+      await User.create(userSeeds);
+
+      for (let i = 0; i < plantSeeds.length; i++) {
+        const { _id, plantAuthor } = await Plant.create(plantSeeds[i]);
+        const user = await User.findOneAndUpdate(
+          { username: plantAuthor },
+          {
+            $addToSet: {
+              plant: _id,
+            },
+          }
+        );
       }
-    },
+
+      return "all done!";
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
     // adding new user
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
@@ -95,47 +137,51 @@ const resolvers = {
       return { token, user };
     },
 
-    // login in existing user
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
 
-      if (!user) {
-        throw new AuthenticationError("No user found with this email address");
-      }
+      // login in existing user
+      login: async (parent, { email, password }) => {
+        const user = await User.findOne({ email });
 
-      const correctPw = await user.isCorrectPassword(password);
 
-      if (!correctPw) {
-        throw new AuthenticationError("Incorrect credentials");
-      }
-
-      const token = signToken(user);
-      // login that is going to create and return a token as part of the authentication protocol
-      return { token, user };
-    },
-
-    addFavorite: async (parent, { plantId }, context) => {
-      if (context.user) {
-        const plant = await Plant.findOne({
-          _id: plantId,
-        });
-        if (plant) {
-          const user = await User.findOneAndUpdate(
-            { _id: context.user._id },
-            { $addToSet: { plant: plant._id } },
-            { new: true }
-          ).populate("plant");
-          return user;
+        if (!user) {
+          throw new AuthenticationError("No user found with this email address");
         }
 
-        return context.user;
-      }
+        const correctPw = await user.isCorrectPassword(password);
 
-      // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
-      throw new Error("You need to be logged in!");
-    },
+        if (!correctPw) {
+          throw new AuthenticationError("Incorrect credentials");
+        }
 
-    removeFavorite: async (parent, { plantId }, context) => {
+        const token = signToken(user);
+        // login that is going to create and return a token as part of the authentication protocol
+        return { token, user };
+      },
+
+
+        addFavorite: async (parent, { plantId }, context) => {
+          if (context.user) {
+            const plant = await Plant.findOne({
+              _id: plantId,
+            });
+            if (plant) {
+              const user = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { plant: plant._id } },
+                { new: true }
+              ).populate("plant");
+              return user;
+            }
+
+
+            return context.user;
+          }
+
+          // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
+          throw new Error("You need to be logged in!");
+        },
+
+      removeFavorite: async (parent, { plantId }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
@@ -147,43 +193,46 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in test-4!");
     },
 
-    addComment: async (parent, { plantId, comment_text }, context) => {
-      if (context.user) {
-        return Plant.findOneAndUpdate(
-          { _id: plantId },
-          {
-            $addToSet: {
-              comments: { comment_text, comment_author: context.user.username },
+            addComment: async (parent, { plantId, comment_text }, context) => {
+              if (context.user) {
+                return Plant.findOneAndUpdate(
+                  { _id: plantId },
+                  {
+                    $addToSet: {
+                      comments: { comment_text, comment_author: context.user.username },
+                    },
+                  },
+                  {
+                    new: true,
+                    runValidators: true,
+                  }
+                );
+              }
+              throw new Error("You need to be logged in -test3!");
             },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-      }
-      throw new Error("You need to be logged in -test3!");
-    },
-    //Checking for the context to add the user
-    /**When we create the token, it identifies the user which creates a context and it is created by the authentication Middleware inside auth.js; once it verifies the user, it will put it as part of the request for the user   */
-    removeComment: async (parent, { plantId, commentId }, context) => {
-      if (context.user) {
-        return Plant.findOneAndUpdate(
-          { _id: plantId },
-          {
-            $pull: {
-              comments: {
-                _id: commentId,
-                comment_author: context.user.username,
+              //Checking for the context to add the user
+              /**When we create the token, it identifies the user which creates a context and it is created by the authentication Middleware inside auth.js; once it verifies the user, it will put it as part of the request for the user   */
+              removeComment: async (parent, { plantId, commentId }, context) => {
+                if (context.user) {
+                  return Plant.findOneAndUpdate(
+                    { _id: plantId },
+                    {
+                      $pull: {
+                        comments: {
+                          _id: commentId,
+                          comment_author: context.user.username,
+                        },
+                      },
+                    },
+                    { new: true }
+                  );
+                }
+                // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
+                throw new Error("You need to be logged in -test5!");
               },
-            },
-          },
-          { new: true }
-        );
-      }
-      // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
-      throw new Error("You need to be logged in -test5!");
-    },
+
+              // add order
+              // addOrder: 
 
     //
   },
