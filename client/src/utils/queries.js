@@ -47,5 +47,15 @@ query User($username: String!) {
   }
 }
 `;
+// search by plant name - will bring results if it is safe or not and for what animal
+export const SAFE_BY_NAME = gql`
+query searchByName($name: String!) {
+  specificPlantS(name: $name) {
+    name
+    animalSafe
+  }
+}
+`;
+
 
 

@@ -22,9 +22,9 @@ const plantSchema = new Schema({
     required: true,
   },
 
- inStore : {
+  inStore: {
     type: Boolean,
-    required: true
+    required: true,
   },
 
   animalSafe: {

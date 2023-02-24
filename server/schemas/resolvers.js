@@ -4,22 +4,21 @@ const { signToken } = require("../utils/auth");
 const userSeeds = require("../seeders/userSeeds.json");
 const plantSeeds = require("../seeders/plantsSeeds.json");
 
-const {AuthenticationError } = require('apollo-server-express')
+const { AuthenticationError } = require("apollo-server-express");
 
 const resolvers = {
   Query: {
-
     //list all users
     users: async () => {
       return User.find().populate("plant");
     },
 
-     //list one user by username
+    //list one user by username
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate("plant");
     },
 
-    ////????
+    ////???? - sorts by time of creation - could use it in comment section
     plants: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Plant.find(params).sort({ createdAt: -1 });
@@ -30,9 +29,9 @@ const resolvers = {
       return Plant.findOne({ _id: plantId });
     },
 
-  // query to separate only plants sold in store in DB
+    // query to separate only plants sold in store in DB
     inStore: async (parent, { name }) => {
-      return Plant.find({ inStore: "true"});
+      return Plant.find({  inStore: true});
     },
 
     // logged in user
@@ -45,30 +44,26 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in -test1!");
     },
     // search for plants by animal - cats dogs or both
-    
-    specificPlantA: async (_, { name, animalSafe }) =>{
-    const animalSafeValue = typeof animalSafe!= undefined ?{"$regex": new RegExp(animalSafe),"$options": "i"}: "cats/dogs";
-    const safeOrnot = await Plant.find({
-    name: { "$regex": new RegExp(name),"$options": "i"}, 
-    animalSafe: animalSafeValue
-    });
-    return safeOrnot;
 
-     
-  },
+    specificPlantA: async (_, { name, animalSafe }) => {
+      const animalSafeValue =
+        typeof animalSafe != undefined
+          ? { $regex: new RegExp(animalSafe), $options: "i" }
+          : "cats/dogs";
+      const safeOrnot = await Plant.find({
+        name: { $regex: new RegExp(name), $options: "i" },
+        animalSafe: animalSafeValue,
+      });
+      return safeOrnot;
+    },
 
-  
-// search for plants safety by plant name - needs to be improved
+    // search for plants safety by plant name - needs to be improved
 
-
-  specificPlantS: async (_, { name }) => {
-    Plant.find({ name: new RegExp(name), animalSafe: $animalSafe })
-},
-
+    specificPlantS: async (_, { name }) =>
+      Plant.find({ name: new RegExp(name) }),
   },
 
   Mutation: {
-
     // seeding database
     seed: async () => {
       try {
@@ -93,14 +88,14 @@ const resolvers = {
         console.error(err);
       }
     },
-// adding new user
+    // adding new user
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
 
-// login in existing user
+    // login in existing user
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -119,21 +114,19 @@ const resolvers = {
       return { token, user };
     },
 
-
-    addFavorite: async (parent, { plantId}, context) => {
+    addFavorite: async (parent, { plantId }, context) => {
       if (context.user) {
         const plant = await Plant.findOne({
           _id: plantId,
         });
-if (plant){
-  const user = await User.findOneAndUpdate(
-    { _id: context.user._id },
-    { $addToSet: { plant: plant._id } }, 
-    {new: true}
-  ).populate("plant");
-  return user;
-}
-        
+        if (plant) {
+          const user = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: { plant: plant._id } },
+            { new: true }
+          ).populate("plant");
+          return user;
+        }
 
         return context.user;
       }
@@ -141,17 +134,14 @@ if (plant){
       // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
       throw new Error("You need to be logged in!");
     },
-    
+
     removeFavorite: async (parent, { plantId }, context) => {
-      if (context.user) 
-      {
-        
+      if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { plant: plantId } },
-          {new: true}
+          { new: true }
         );
-
       }
       //Review this part that was returning an error even after being logged in in Anthony's template
       throw new AuthenticationError("You need to be logged in test-4!");

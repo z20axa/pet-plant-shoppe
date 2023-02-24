@@ -45,7 +45,7 @@ const typeDefs = gql`
     plants(username: String): [Plant]
     plant(plantId: ID!): Plant
     me: User
-    inStore (inStore: String!):[Plant]
+    inStore:[Plant]
     specificPlantA(name:String, animalSafe: String!):[Plant]
     specificPlantS(name:String!):[Plant]
    
