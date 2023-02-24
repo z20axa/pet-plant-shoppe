@@ -165,7 +165,7 @@
   },
   {
     "name": "Aloe Vera",
-    "description": "   ",
+    "description": "  abc1 ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "   ",
@@ -178,7 +178,7 @@
   },
   {
     "name": "Desert Rose",
-    "description": "   ",
+    "description": " abc2  ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "   ",
@@ -191,7 +191,7 @@
   },
   {
     "name": "English Ivy",
-    "description": "   ",
+    "description": "  abc3 ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "    ",
@@ -204,7 +204,7 @@
   },
   {
     "name": "Red-Marginated Dracaena",
-    "description": "   ",
+    "description": "  abc4 ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "    ",
@@ -217,7 +217,7 @@
   },
   {
     "name": "Poinsettia",
-    "description": "   ",
+    "description": " abc5  ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "    ",
@@ -230,7 +230,7 @@
   },
   {
     "name": "Sago Palm",
-    "description": "  ",
+    "description": " abc6 ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "  ",
@@ -243,7 +243,7 @@
   },
   {
     "name": "Asparagus Fern",
-    "description": "   ",
+    "description": "  abc7 ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "   ",
@@ -256,7 +256,7 @@
   },
   {
     "name": "Caladium Elephant Ear",
-    "description": "   ",
+    "description": " abc8  ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "  ",
@@ -269,7 +269,7 @@
   },
   {
     "name": "Begonia",
-    "description": "  ",
+    "description": " abc9 ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "  ",
@@ -282,7 +282,7 @@
   },
   {
     "name": "Geranium",
-    "description": "  ",
+    "description": " abc10 ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "  ",
@@ -295,7 +295,7 @@
   },
   {
     "name": "Snake Plant",
-    "description": "  ",
+    "description": " abc11 ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "  ",
@@ -308,7 +308,7 @@
   },
   {
     "name": "Peace Lily",
-    "description": "  ",
+    "description": " abc12 ",
     "price": 10.0,
     "inStore": false,
     "soilRequirements": "   ",
