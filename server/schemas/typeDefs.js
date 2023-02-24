@@ -8,7 +8,7 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    plants: [Plant]!
+    plant: [Plant]
   }
 
   type Plant {
@@ -47,7 +47,7 @@ const typeDefs = gql`
     me: User
     inStore (inStore: String!):[Plant]
     specificPlantA(name:String, animalSafe: String!):[Plant]
-    specificPlantS(name:String):[Plant]
+    specificPlantS(name:String!):[Plant]
    
     
   }
@@ -57,7 +57,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     # this login matches the token in the resolvers.js
     login(email: String!, password: String!): Auth
-    addFavorite(name: String!): Plant
+    addFavorite(plantId: ID!): User
     removeFavorite(plantId: ID!): Plant
     addComment(plantId: ID!, comment_text: String!): Plant
     removeComment(plantId: ID!, commentId: ID!): Plant
