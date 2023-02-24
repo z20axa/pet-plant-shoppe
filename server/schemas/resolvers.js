@@ -8,16 +8,24 @@ const {AuthenticationError } = require('apollo-server-express')
 
 const resolvers = {
   Query: {
+
+    //list all users
     users: async () => {
       return User.find().populate("plant");
     },
+
+     //list one user by username
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate("plant");
     },
+
+    ////????
     plants: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Plant.find(params).sort({ createdAt: -1 });
     },
+
+    ///finding one plant by plant id
     plant: async (parent, { plantId }) => {
       return Plant.findOne({ _id: plantId });
     },
@@ -26,6 +34,8 @@ const resolvers = {
     inStore: async (parent, { name }) => {
       return Plant.find({ inStore: "true"});
     },
+
+    // logged in user
 
     me: async (parent, args, context) => {
       //check to see if user is logged in
@@ -52,12 +62,14 @@ const resolvers = {
 
 
   specificPlantS: async (_, { name }) => {
-    Plant.find({ name: new RegExp(name) , animalSafe: $animalSafe})
+    Plant.find({ name: new RegExp(name), animalSafe: $animalSafe })
 },
 
   },
 
   Mutation: {
+
+    // seeding database
     seed: async () => {
       try {
         await Plant.deleteMany({});
@@ -81,12 +93,14 @@ const resolvers = {
         console.error(err);
       }
     },
-
+// adding new user
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
+
+// login in existing user
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -104,24 +118,48 @@ const resolvers = {
       // login that is going to create and return a token as part of the authentication protocol
       return { token, user };
     },
-    addFavorite: async (parent, { name }, context) => {
+
+
+    addFavorite: async (parent, { plantId}, context) => {
       if (context.user) {
-        const plant = await Plant.create({
-          name,
-          plantAuthor: context.user.username,
+        const plant = await Plant.findOne({
+          _id: plantId,
         });
+if (plant){
+  const user = await User.findOneAndUpdate(
+    { _id: context.user._id },
+    { $addToSet: { plant: plant._id } }, 
+    {new: true}
+  ).populate("plant");
+  return user;
+}
+        
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { plants: plant._id } }
-        );
-
-        return plant;
+        return context.user;
       }
 
       // throw new AuthenticationError('You need to be logged in!'); <-Deleted and replaced by line below
       throw new Error("You need to be logged in!");
     },
+    
+    removeFavorite: async (parent, { plantId }, context) => {
+      if (context.user) {
+        const plant = await Plant.findOne({
+          _id: plantId,
+          plantAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { plant: plant._id } }
+        );
+
+        return plant;
+      }
+      //Review this part that was returning an error even after being logged in in Anthony's template
+      throw new AuthenticationError("You need to be logged in test-4!");
+    },
+
     addComment: async (parent, { plantId, comment_text }, context) => {
       if (context.user) {
         return Plant.findOneAndUpdate(
@@ -139,24 +177,6 @@ const resolvers = {
       }
       throw new Error("You need to be logged in -test3!");
     },
-    removeFavorite: async (parent, { plantId }, context) => {
-      if (context.user) {
-        const plant = await Plant.findOneAndDelete({
-          _id: plantId,
-          plantAuthor: context.user.username,
-        });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { plant: plant._id } }
-        );
-
-        return plant;
-      }
-      //Review this part that was returning an error even after being logged in in Anthony's template
-      throw new AuthenticationError("You need to be logged in test-4!");
-    },
-
     //Checking for the context to add the user
     /**When we create the token, it identifies the user which creates a context and it is created by the authentication Middleware inside auth.js; once it verifies the user, it will put it as part of the request for the user   */
     removeComment: async (parent, { plantId, commentId }, context) => {
