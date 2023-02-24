@@ -59,7 +59,7 @@ const typeDefs = gql`
     plants(username: String): [Plant]
     plant(plantId: ID!): Plant
     me: User
-    inStore (inStore: String!):[Plant]
+    inStore:[Plant]
     specificPlantA(name:String, animalSafe: String!):[Plant]
     specificPlantS(name:String!):[Plant]
     order(_id: ID!): Order
@@ -73,14 +73,13 @@ const typeDefs = gql`
     # this login matches the token in the resolvers.js
     login(email: String!, password: String!): Auth
     addFavorite(plantId: ID!): User
-    removeFavorite(plantId: ID!): Plant
+    removeFavorite(plantId: ID!): User
     addComment(plantId: ID!, comment_text: String!): Plant
     removeComment(plantId: ID!, commentId: ID!): Plant
     addOrder(products: [ID]!): Order
     
     #purchase plant needs to be created 
-    #Add favorite
-    #Remove Favorite
+   
  
   }
 
