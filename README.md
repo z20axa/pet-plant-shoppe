@@ -46,7 +46,7 @@ Here is the link of the finished work:
 ## Credits
 
 Muchir Bickel (Front-End)
-Paul Hagan (Front-End)
+Paul A. Hagan (Front-End)
 Natalia Venkatesh (Back-End)
 Angelica Ibarra (Back-End)
 Alejandro Asencio (Back-End)
