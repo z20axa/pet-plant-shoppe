@@ -25,6 +25,27 @@ mutation login ($email: String!, $password: String!) {
 `;
 
 
+export const ADD_FAV = gql`
+mutation AddFavorite($plantId: ID!) {
+  addFavorite(plantId: $plantId) {
+    _id
+    plant {
+      _id
+    }
+  }
+}
+`;
+
+
+
+export const REMOVE_FAV = gql`
+mutation removeFav($plantId: ID!) {
+  removeFavorite(plantId: $plantId) {
+    _id
+  }
+}
+
+`;
 
 export const ADD_COMMENT = gql`
 mutation addComment ($plantId: ID!, $commentText: String!) {
@@ -35,6 +56,10 @@ mutation addComment ($plantId: ID!, $commentText: String!) {
 }
 `;
 
-export const ADD_FAV = gql`
-mutation addFavorite 
-`
+export const DELETE_COMMENT = gql`
+mutation addComment ($plantId: ID!, $commentID: ID!) {
+  removeComment(plantId: $plantId, commentID: $commentID) {
+    _id
+  }
+}
+`;

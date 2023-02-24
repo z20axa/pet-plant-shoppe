@@ -58,13 +58,12 @@ const typeDefs = gql`
     # this login matches the token in the resolvers.js
     login(email: String!, password: String!): Auth
     addFavorite(plantId: ID!): User
-    removeFavorite(plantId: ID!): Plant
+    removeFavorite(plantId: ID!): User
     addComment(plantId: ID!, comment_text: String!): Plant
     removeComment(plantId: ID!, commentId: ID!): Plant
     
     #purchase plant needs to be created 
-    #Add favorite
-    #Remove Favorite
+   
  
   }
 

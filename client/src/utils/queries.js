@@ -37,4 +37,15 @@ query byAnimal($animalSafe: String!) {
 }
 `;
 
+// display list of favorites per user logged in
+export const LIST_FAV_ONEUSER = gql`
+query User($username: String!) {
+  user(username: $username) {
+    plant {
+      name
+    }
+  }
+}
+`;
+
 

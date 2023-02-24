@@ -143,18 +143,15 @@ if (plant){
     },
     
     removeFavorite: async (parent, { plantId }, context) => {
-      if (context.user) {
-        const plant = await Plant.findOne({
-          _id: plantId,
-          plantAuthor: context.user.username,
-        });
-
-        await User.findOneAndUpdate(
+      if (context.user) 
+      {
+        
+        return User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { plant: plant._id } }
+          { $pull: { plant: plantId } },
+          {new: true}
         );
 
-        return plant;
       }
       //Review this part that was returning an error even after being logged in in Anthony's template
       throw new AuthenticationError("You need to be logged in test-4!");
