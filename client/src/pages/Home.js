@@ -29,6 +29,7 @@ const Home = () => {
             />
           )}
         </div>
+        <div>Loading......loading1</div>
       </div>
     </main>
   );
