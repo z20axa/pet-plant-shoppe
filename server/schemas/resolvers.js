@@ -54,10 +54,10 @@ const resolvers = {
     // checkout query for plants for purchase
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
-      const order = new Order({ plants: args.plants });
+      const plant = new Plant({ plants: args.plants });
       const line_items = [];
 
-      const { plants } = await order.populate('plants');
+      const { plants } = await plant.populate('plants');
 
       for (let i = 0; i < plants.length; i++) {
         const plant = await stripe.plants.create({
