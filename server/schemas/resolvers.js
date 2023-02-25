@@ -19,6 +19,17 @@ const resolvers = {
       return User.findOne({ username }).populate("plant");
     },
 
+    //???? - sorts by time of creation - could use it in comment section
+    plants: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Plant.find(params).sort({ createdAt: -1 });
+    },
+
+    //finding one plant by plant id
+    plant: async (parent, { plantId }) => {
+      return Plant.findOne({ _id: plantId });
+    },
+
     // get stripe key
     getStripeKey: () => {
       return {
@@ -26,7 +37,7 @@ const resolvers = {
       };
     },
 
-    // order plants for purchase
+    // order query for plants for purchase
     order: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
@@ -40,19 +51,44 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    // need to add and finish it
-    // checkout:
+    // checkout query for plants for purchase
+    checkout: async (parent, args, context) => {
+      const url = new URL(context.headers.referer).origin;
+      const order = new Order({ plants: args.plants });
+      const line_items = [];
 
-    ////???? - sorts by time of creation - could use it in comment section
-    plants: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Plant.find(params).sort({ createdAt: -1 });
-    },
+      const { plants } = await order.populate('plants');
 
-    ///finding one plant by plant id
-    plant: async (parent, { plantId }) => {
-      return Plant.findOne({ _id: plantId });
-    },
+      for (let i = 0; i < plants.length; i++) {
+        const plant = await stripe.plants.create({
+          name: plants[i].name,
+          description: plants[i].description,
+          // images: [`${url}/images/${products[i].image}`]
+        });
+
+        const price = await stripe.prices.create({
+          plant: plant.id,
+          unit_amount: plants[i].price * 100,
+          currency: 'usd',
+        });
+
+        line_items.push({
+          price: price.id,
+          quantity: 1
+        });
+      }
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`
+      });
+
+      return { session: session.id };
+    }
+  },
 
     // query to separate only plants sold in store in DB
     inStore: async (parent, { name }) => {
