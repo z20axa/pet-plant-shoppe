@@ -1,5 +1,6 @@
 const { User, Plant } = require("../models");
 const { signToken } = require("../utils/auth");
+require('dotenv').config();
 
 const userSeeds = require("../seeders/userSeeds.json");
 const plantSeeds = require("../seeders/plantsSeeds.json");
