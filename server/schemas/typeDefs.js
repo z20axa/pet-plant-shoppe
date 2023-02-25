@@ -43,11 +43,11 @@ const typeDefs = gql`
     user: User
   }
 
-  #type Order {
-    #_id: ID
-   # purchaseDate: String
-    #products: [Product]
-  #}
+  type Order {
+    _id: ID
+    purchaseDate: String
+    products: [Product]
+  }
 
   type Checkout {
     session: ID
@@ -62,9 +62,9 @@ const typeDefs = gql`
     inStore:[Plant]
     specificPlantA(name:String, animalSafe: String!):[Plant]
     specificPlantS(name:String!):[Plant]
-    #order(_id: ID!): Order
+    order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
-    getStripeKey: StripeKey
+    getstripekey: StripeKey
   }
   
   type Mutation {
@@ -76,7 +76,7 @@ const typeDefs = gql`
     removeFavorite(plantId: ID!): User
     addComment(plantId: ID!, comment_text: String!): Plant
     removeComment(plantId: ID!, commentId: ID!): Plant
-    #addOrder(products: [ID]!): Order
+    addOrder(products: [ID]!): Order
     
     #purchase plant needs to be created 
    
