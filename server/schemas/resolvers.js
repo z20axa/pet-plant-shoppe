@@ -26,19 +26,19 @@ const resolvers = {
       };
     },
 
-    // need to revise and finish it
-    // order: async (parent, { _id }, context) => {
-    //   if (context.user) {
-    //     const user = await User.findById(context.user._id).populate({
-    //       path: "orders.products",
-    //       populate: "category",
-    //     });
+    // order plants for purchase
+    order: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: "orders.products",
+          populate: "category",
+        });
 
-    //     return user.orders.id(_id);
-    //   }
+        return user.orders.id(_id);
+      }
 
-    //   throw new AuthenticationError("Not logged in");
-    // },
+      throw new AuthenticationError("Not logged in");
+    },
 
     // need to add and finish it
     // checkout:

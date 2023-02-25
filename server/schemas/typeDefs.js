@@ -46,7 +46,7 @@ const typeDefs = gql`
   type Order {
     _id: ID
     purchaseDate: String
-    products: [Product]
+    plants: [Plant]
   }
 
   type Checkout {
@@ -63,7 +63,7 @@ const typeDefs = gql`
     specificPlantA(name:String, animalSafe: String!):[Plant]
     specificPlantS(name:String!):[Plant]
     order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
+    checkout(plants: [ID]!): Checkout
     getStripeKey: StripeKey
   }
   
@@ -76,7 +76,7 @@ const typeDefs = gql`
     removeFavorite(plantId: ID!): User
     addComment(plantId: ID!, comment_text: String!): Plant
     removeComment(plantId: ID!, commentId: ID!): Plant
-    addOrder(products: [ID]!): Order
+    addOrder(plants: [ID]!): Order
     
     #purchase plant needs to be created 
    
