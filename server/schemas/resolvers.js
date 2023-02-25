@@ -1,4 +1,4 @@
-const { User, Plant } = require("../models");
+const { User, Plant, Order } = require("../models");
 const { signToken } = require("../utils/auth");
 require('dotenv').config();
 
@@ -54,21 +54,22 @@ const resolvers = {
     // checkout query for plants for purchase
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
-      const plant = new Plant({ plants: args.plants });
+      const order = new Order({ products: args.products });
       const line_items = [];
+      const stripe = getStripeKey();
 
-      const { plants } = await plant.populate('plants');
+      const { products } = await order.populate('products');
 
-      for (let i = 0; i < plants.length; i++) {
-        const plant = await stripe.plants.create({
-          name: plants[i].name,
-          description: plants[i].description,
+      for (let i = 0; i < products.length; i++) {
+        const product = await stripe.products.create({
+          name: products[i].name,
+          description: products[i].description,
           // images: [`${url}/images/${products[i].image}`]
         });
 
         const price = await stripe.prices.create({
-          plant: plant.id,
-          unit_amount: plants[i].price * 100,
+          product: product.id,
+          unit_amount: products[i].price * 100,
           currency: 'usd',
         });
 
