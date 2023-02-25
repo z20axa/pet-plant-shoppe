@@ -64,7 +64,7 @@ const typeDefs = gql`
     specificPlantS(name:String!):[Plant]
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
-    getstripekey: StripeKey
+    getStripeKey: StripeKey
   }
   
   type Mutation {
