@@ -250,11 +250,21 @@ const resolvers = {
       throw new Error("You need to be logged in -test5!");
     },
 
-    // add order
-    // addOrder:
+    // add order to buy plants
+    addOrder: async (parent, { products }, context) => {
+      console.log(context);
+      if (context.user) {
+        const order = new Order({ products });
 
-    //
-  },
+        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+        return order;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+  }
 };
+
 
 module.exports = resolvers;
