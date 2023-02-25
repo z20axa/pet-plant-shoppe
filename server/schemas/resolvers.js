@@ -87,8 +87,7 @@ const resolvers = {
       });
 
       return { session: session.id };
-    }
-  },
+    },
 
     // query to separate only plants sold in store in DB
     inStore: async (parent, { name }) => {
