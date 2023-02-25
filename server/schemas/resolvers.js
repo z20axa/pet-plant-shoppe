@@ -1,5 +1,6 @@
-const { User, Plant } = require("../models");
+const { User, Plant, Order } = require("../models");
 const { signToken } = require("../utils/auth");
+require('dotenv').config();
 
 const userSeeds = require("../seeders/userSeeds.json");
 const plantSeeds = require("../seeders/plantsSeeds.json");
@@ -18,6 +19,17 @@ const resolvers = {
       return User.findOne({ username }).populate("plant");
     },
 
+    //???? - sorts by time of creation - could use it in comment section
+    plants: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Plant.find(params).sort({ createdAt: -1 });
+    },
+
+    //finding one plant by plant id
+    plant: async (parent, { plantId }) => {
+      return Plant.findOne({ _id: plantId });
+    },
+
     // get stripe key
     getStripeKey: () => {
       return {
@@ -25,32 +37,57 @@ const resolvers = {
       };
     },
 
-    // need to revise and finish it
-    // order: async (parent, { _id }, context) => {
-    //   if (context.user) {
-    //     const user = await User.findById(context.user._id).populate({
-    //       path: "orders.products",
-    //       populate: "category",
-    //     });
+    // order query for plants for purchase
+    order: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: "orders.plants",
+          populate: "plants",
+        });
 
-    //     return user.orders.id(_id);
-    //   }
+        return user.orders.id(_id);
+      }
 
-    //   throw new AuthenticationError("Not logged in");
-    // },
-
-    // need to add and finish it
-    // checkout:
-
-    ////???? - sorts by time of creation - could use it in comment section
-    plants: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Plant.find(params).sort({ createdAt: -1 });
+      throw new AuthenticationError("Not logged in");
     },
 
-    ///finding one plant by plant id
-    plant: async (parent, { plantId }) => {
-      return Plant.findOne({ _id: plantId });
+    // checkout query for plants for purchase
+    checkout: async (parent, args, context) => {
+      const url = new URL(context.headers.referer).origin;
+      const order = new Order({ products: args.products });
+      const line_items = [];
+      const stripe = getStripeKey();
+
+      const { products } = await order.populate('products');
+
+      for (let i = 0; i < products.length; i++) {
+        const product = await stripe.products.create({
+          name: products[i].name,
+          description: products[i].description,
+          // images: [`${url}/images/${products[i].image}`]
+        });
+
+        const price = await stripe.prices.create({
+          product: product.id,
+          unit_amount: products[i].price * 100,
+          currency: 'usd',
+        });
+
+        line_items.push({
+          price: price.id,
+          quantity: 1
+        });
+      }
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`
+      });
+
+      return { session: session.id };
     },
 
     // query to separate only plants sold in store in DB
@@ -213,11 +250,21 @@ const resolvers = {
       throw new Error("You need to be logged in -test5!");
     },
 
-    // add order
-    // addOrder:
+    // add order to buy plants
+    addOrder: async (parent, { products }, context) => {
+      console.log(context);
+      if (context.user) {
+        const order = new Order({ products });
 
-    //
-  },
+        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+        return order;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+  }
 };
+
 
 module.exports = resolvers;
