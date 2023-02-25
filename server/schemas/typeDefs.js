@@ -8,7 +8,7 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    plants: [Plant]!
+    plant: [Plant]
   }
 
   type Plant {
@@ -27,6 +27,10 @@ const typeDefs = gql`
     inStore: String!
   }
 
+  type StripeKey {
+    key: String
+  }
+
   type Comment {
     _id: ID
     comment_text: String
@@ -39,17 +43,28 @@ const typeDefs = gql`
     user: User
   }
 
+  #type Order {
+    #_id: ID
+   # purchaseDate: String
+    #products: [Product]
+  #}
+
+  type Checkout {
+    session: ID
+  }
+
   type Query {
     users: [User]
     user(username: String!): User
     plants(username: String): [Plant]
     plant(plantId: ID!): Plant
     me: User
-    inStore (inStore: String!):[Plant]
+    inStore:[Plant]
     specificPlantA(name:String, animalSafe: String!):[Plant]
-    specificPlantS(name:String):[Plant]
-   
-    
+    specificPlantS(name:String!):[Plant]
+    #order(_id: ID!): Order
+    checkout(products: [ID]!): Checkout
+    getStripeKey: StripeKey
   }
   
   type Mutation {
@@ -57,14 +72,14 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     # this login matches the token in the resolvers.js
     login(email: String!, password: String!): Auth
-    addFavorite(name: String!): Plant
-    removeFavorite(plantId: ID!): Plant
+    addFavorite(plantId: ID!): User
+    removeFavorite(plantId: ID!): User
     addComment(plantId: ID!, comment_text: String!): Plant
     removeComment(plantId: ID!, commentId: ID!): Plant
+    #addOrder(products: [ID]!): Order
     
     #purchase plant needs to be created 
-    #Add favorite
-    #Remove Favorite
+   
  
   }
 
