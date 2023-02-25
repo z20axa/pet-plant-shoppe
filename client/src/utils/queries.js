@@ -37,4 +37,25 @@ query byAnimal($animalSafe: String!) {
 }
 `;
 
+// display list of favorites per user logged in
+export const LIST_FAV_ONEUSER = gql`
+query User($username: String!) {
+  user(username: $username) {
+    plant {
+      name
+    }
+  }
+}
+`;
+// search by plant name - will bring results if it is safe or not and for what animal
+export const SAFE_BY_NAME = gql`
+query searchByName($name: String!) {
+  specificPlantS(name: $name) {
+    name
+    animalSafe
+  }
+}
+`;
+
+
 

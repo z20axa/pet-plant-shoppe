@@ -7,24 +7,45 @@ export const LOGIN_USER = gql`
       user {
         _id
         username
+        token
       }
     }
   }
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-      }
+mutation login ($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    user {
+      username
     }
+    token
   }
+}
 `;
 
 
+export const ADD_FAV = gql`
+mutation AddFavorite($plantId: ID!) {
+  addFavorite(plantId: $plantId) {
+    _id
+    plant {
+      _id
+    }
+  }
+}
+`;
+
+
+
+export const REMOVE_FAV = gql`
+mutation removeFav($plantId: ID!) {
+  removeFavorite(plantId: $plantId) {
+    _id
+  }
+}
+
+`;
 
 export const ADD_COMMENT = gql`
 mutation addComment ($plantId: ID!, $commentText: String!) {
@@ -35,3 +56,10 @@ mutation addComment ($plantId: ID!, $commentText: String!) {
 }
 `;
 
+export const DELETE_COMMENT = gql`
+mutation addComment ($plantId: ID!, $commentID: ID!) {
+  removeComment(plantId: $plantId, commentID: $commentID) {
+    _id
+  }
+}
+`;
