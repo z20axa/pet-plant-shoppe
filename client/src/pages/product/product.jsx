@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import "./productDetail.scss";
+import "./Product.scss";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BalanceIcon from "@mui/icons-material/Balance";
-import useFetch from "../../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
@@ -93,9 +92,9 @@ const Product = () => {
               </div>
             </div>
             <div className="info">
-              <span>plant name:</span>
-              <span>Plant Type: </span>
-              <span>Tag: </span>
+              <span>Vendor: Polo</span>
+              <span>Product Type: T-Shirt</span>
+              <span>Tag: T-Shirt, Women, Top</span>
             </div>
             <hr />
             <div className="info">
@@ -113,3 +112,5 @@ const Product = () => {
 };
 
 export default Product;
+
+
