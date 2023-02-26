@@ -10,8 +10,6 @@ import Ourpro from "./pages/Ourpro/Ourpro";
 import Checkp from "./pages/Checkp/Checkp";
 
 
-
-
 import "./app.scss"
 
 const Layout = () => {
@@ -23,7 +21,6 @@ const Layout = () => {
     </div>
   );
 };
-
 
 const router = createBrowserRouter([
   {
