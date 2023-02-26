@@ -10,16 +10,16 @@ const Footer = () => {
           <h1><Link style={{ textDecoration: 'none', color: 'white' }} to="/">
             Home
           </Link></h1>
-          <span><Link style={{ textDecoration: 'none' }} to="/">
+          <span><Link style={{ textDecoration: 'none' }} to="/Products">
           SHOP
           </Link></span>
-          <span><Link style={{ textDecoration: 'none' }} to="/">
+          <span><Link style={{ textDecoration: 'none' }} to="/Checkp">
           CHECK PLANTS
           </Link></span>
-          <span><Link style={{ textDecoration: 'none' }} to="/">
+          <span><Link style={{ textDecoration: 'none' }} to="/threepawsClub">
           3PAWS CLUB
           </Link></span>
-          <span><Link style={{ textDecoration: 'none' }} to="/">
+          <span><Link style={{ textDecoration: 'none' }} to="/Ourpro">
           OUR PROMISE
           </Link></span>
         </div>
