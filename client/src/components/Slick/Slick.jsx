@@ -11,8 +11,8 @@ export default class SimpleSlider extends Component {
       infinite: true,
       autoplay:true,
       speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 3
+      slidesToShow: 5,
+      slidesToScroll: 5
     };
     return (
       <div>
