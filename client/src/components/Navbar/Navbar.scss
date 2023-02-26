@@ -29,23 +29,24 @@
     }
 
     .center {
+      flex: 2;
+      text-align: center;
       font-size: 30px;
       letter-spacing: 1px;
       color: rgb(96, 158, 55);
       font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-      margin:0 30% 0 5%;
+
     }
 
     .right {
-      display: flex;
+      flex: 1;
       align-items: center;
       gap: 25px;
 
       .icons {
         display: flex;
-        gap: 20px;
+        gap: 25px;
         color: #777;
-        cursor: pointer;
         margin-right: 40px;
 
         .cartIcon {
@@ -56,7 +57,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background-color: #2879fe;
+            background-color:rgb(96, 158, 55);
             color: white;
             position: absolute;
             right: -10px;

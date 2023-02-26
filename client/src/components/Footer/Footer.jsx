@@ -1,39 +1,69 @@
 import React from "react";
 import "./Footer.scss";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className="footer">
       <div className="top">
         <div className="item">
-          <h1>SHOP</h1>
-          <span>CHECK PLANTS</span>
-          <span>3PAWS CLUB</span>
-          <span>OUR PROMISE</span>
+          <h1><Link style={{ textDecoration: 'none', color: 'white' }} to="/">
+            Home
+          </Link></h1>
+          <span><Link style={{ textDecoration: 'none' }} to="/">
+          SHOP
+          </Link></span>
+          <span><Link style={{ textDecoration: 'none' }} to="/">
+          CHECK PLANTS
+          </Link></span>
+          <span><Link style={{ textDecoration: 'none' }} to="/">
+          3PAWS CLUB
+          </Link></span>
+          <span><Link style={{ textDecoration: 'none' }} to="/">
+          OUR PROMISE
+          </Link></span>
         </div>
-
         <div className="item">
-          <h1>About US</h1>
+          <h1>Social Media</h1>
+          <span><Link style={{ textDecoration: 'none'}} to="https://www.facebook.com/">
+          Facebook
+          </Link></span>
+          <span><Link style={{ textDecoration: 'none'}} to="https://www.instagram.com/">
+          Instagram
+          </Link></span>
+          <span><Link style={{ textDecoration: 'none'}} to="https://twitter.com/">
+          Twitter
+          </Link></span>
+          <span><Link style={{ textDecoration: 'none'}} to="https://www.google.com/">
+          Google
+          </Link></span>
+          <span><Link style={{ textDecoration: 'none'}} to="https://www.pinterest.com/">
+          Pinterest
+          </Link></span>
+        </div>
+        <div className="item">
+          <h1>Open Hours</h1>
           <span>
-          We are located in PA, our mission is to inspire green spaces by connecting people with plants. We believe a strong relationship with plants will lead to greener and more sustainable lifestyles. we deliver healthy, happy plants to you and your loved ones.
+            Monday - Friday: 8:00 AM- 5:00 PM<br></br>
+            Saturday - Sunday: Closed
           </span>
         </div>
         <div className="item">
-          <h1>Contact</h1>
+          <h1>Contact us</h1>
           <span>
-          We aim to make plant buying and plant care easy & fun. If you have questions or feedback about an order, plant care, or your experience with Lively Root, here's how to contact us.
+            Phone: 123-456-7890<br></br>
+            Email: hello@reallygreatsite.com<br></br>
+            Address: 123 Anywhere St.Any City PA 12345
           </span>
         </div>
       </div>
       <div className="bottom">
-        <div className="left">
-        <img src="img/Logo.png" alt="" width="50" height="60"/>
+        <div className="center">
+          <img src="img/Logo.png" alt="" width="40" height="50" />
           <span className="logo">Perfect Pet Plant Shoppe</span>
           <span className="copyright">
-            © Copyright 2023. All Rights Reserved
+            © Copyright 2023. Made by group three, All Rights Reserved
           </span>
-        </div>
-        <div className="right">
         </div>
       </div>
     </div>
