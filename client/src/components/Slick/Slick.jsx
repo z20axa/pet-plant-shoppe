@@ -18,22 +18,22 @@ export default class SimpleSlider extends Component {
       <div>
         <Slider {...settings}>
           <div>
-          <img src="img/plants-5.jpg" alt="" width="400" height="200"/>
+          <img src="img/plants-2.jpg" alt="" width="350" height="200"/>
           </div>
           <div>
-          <img src="img/plants-5.jpg" alt="" width="400" height="200"/>
+          <img src="img/catplpant5.jpeg" alt="" width="350" height="200"/>
           </div>
           <div>
-          <img src="img/plants-5.jpg" alt="" width="400" height="200"/>
+          <img src="img/1.PNG" alt="" width="350" height="200"/>
           </div>
           <div>
-          <img src="img/Logo.png" alt="" width="250" height="170"/>
+          <img src="img/4.jpg" alt="" width="350" height="200"/>
           </div>
           <div>
-          <img src="img/Logo.png" alt="" width="250" height="170"/>
+          <img src="img/plants-5.jpg" alt="" width="350" height="200"/>
           </div>
           <div>
-          <img src="img/Logo.png" alt="" width="250" height="170"/>
+          <img src="img/catplants3.jpeg" alt="" width="350" height="200"/>
           </div>
         </Slider>
       </div>

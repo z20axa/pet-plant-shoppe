@@ -1,11 +1,11 @@
 import React from "react";
-import "./Categories.scss";
 import { Link } from "react-router-dom";
+import "./Searchlist.scss";
 
 
-const Categories = () => {
+const Searchlist= () => {
   return (
-    <div className="categories">
+    <div className="Searchlist">
       <div className="col">
         <div className="row">
           <img
@@ -36,12 +36,12 @@ const Categories = () => {
       <div className="col">
         <div className="row">
           <img
-            src="plant images/moneyTree.png"
+            src="plant images/bostonFern.png"
             alt=""
           />
           <button>
             <Link to="/products/1" className="link">
-            moneyTree
+            bostonFern
             <br></br>
             price: $20
             </Link>
@@ -99,4 +99,4 @@ const Categories = () => {
 
 );
 }
-export default Categories;
+export default Searchlist;

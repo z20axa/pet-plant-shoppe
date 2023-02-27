@@ -14,7 +14,7 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1);
 
   const dispatch = useDispatch();
-  const { data, loading, error } = useFetch(`/products/${id}?populate=*`);
+  const { data, loading, error } = (`/products/${id}?populate=*`);
 
   return (
     <div className="product">
@@ -92,9 +92,9 @@ const Product = () => {
               </div>
             </div>
             <div className="info">
-              <span>Vendor: Polo</span>
-              <span>Product Type: T-Shirt</span>
-              <span>Tag: T-Shirt, Women, Top</span>
+              <span>Vendor: 1</span>
+              <span>Product Type: plants</span>
+              <span>cat friendly</span>
             </div>
             <hr />
             <div className="info">

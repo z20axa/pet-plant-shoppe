@@ -7,8 +7,8 @@ const Ourpro = () => {
 
       <div className="promise">
         <img
-          src="img/plants-5.jpg"
-          alt="" width="600" height="400" 
+          src="img/plants-2.jpg"
+          alt="" width="500" height="400" 
         />
       </div>
       <div>
