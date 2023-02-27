@@ -30,11 +30,42 @@ query InStore($inStore: String!) {
 `;
 // search by animal - will bring alll results for dogs or cats or both
 export const BY_ANIMAL = gql`
-query byAnimal($animalSafe: String!) {
+query SpecificPlantA($animalSafe: String!) {
   specificPlantA(animalSafe: $animalSafe) {
     name
   }
 }
 `;
+
+//search by name of the plant  - will tell if it is safe or not
+export const BY_PLANTNAME = gql`
+query searchByName($name: String!) {
+  specificPlantS(name: $name) {
+    name
+    animalSafe
+  }
+}
+`
+;
+
+// finds plant by ID
+export const FIND_PLANT =gql`
+query Plant($plantId: ID!) {
+  plant(plantId: $plantId) {
+    _id
+    air
+    careLevel
+    animalSafe
+    description
+    growthHabit
+    light
+    name
+    price
+    soilRequirement
+  }
+}
+`
+
+
 
 

@@ -3,6 +3,10 @@ import Searchlist from '../../components/Searchlist/Searchlist';
 import Contact from '../../components/Contact/Contact';
 import "./Checkp.scss";
 import { useState } from "react";
+import { useQuery } from "@apollo/client";
+import { BY_ANIMAL, BY_PLANTNAME } from '../../utils/queries';
+
+
 
 const Checkp = () => {
   const data=[

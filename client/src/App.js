@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
-import Product from "./pages/Product/Product";
+import Product from "./pages/product/product";
 import Signin from "./pages/Signin/Signin";
 import Login from "./pages/Login/Login";
 import Ourpro from "./pages/Ourpro/Ourpro";
@@ -23,6 +31,27 @@ const Layout = () => {
   );
 };
 
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,32 +62,32 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/Products",
+        path: "/products",
         element: <Products/>,
       },
       {
-        path: "/Products",
+        path: "/product/:id",
         element: <Product/>,
       },
       {
-        path: "/threepawsClub",
+        path: "/threepawsclub",
         element: <threepawsClub/>,
       },
  
       {
-        path: "/Ourpro",
+        path: "/ourpro",
         element: <Ourpro/>,
       },
       {
-        path: "/Signin",
+        path: "/signin",
         element: <Signin/>,
       },
       {
-        path: "/Login",
+        path: "/login",
         element: <Login/>,
       },
       {
-        path: "/Checkp",
+        path: "/checkp",
         element: <Checkp/>,
       },
 
@@ -69,7 +98,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div>
+        <ApolloProvider client={client}>
       <RouterProvider router={router} />
+      </ApolloProvider>
     </div>
   );
 }

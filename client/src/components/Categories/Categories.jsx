@@ -1,19 +1,34 @@
 import React from "react";
 import "./Categories.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 
+import {IN_STORE} from '../../utils/queries';
 
 const Categories = () => {
+  const {plantId} = useParams();
+  const {loading, data} =useQuery(IN_STORE, {
+    variables: {plantId: plantId},
+  });
+  const plant = data?.plantId || {};
+  console.log(plant)
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+ 
   return (
     <div className="categories">
       <div className="col">
         <div className="row">
+        
+       
+
           <img
             src="plant images/africanViolet.png"
             alt=""
           />
           <button>
-            <Link className="link" to="/products/1">
+            <Link className="link" to="/product/">
             africanViolet<br></br>
             price: $20
             </Link>
