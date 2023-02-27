@@ -36,9 +36,10 @@ const Checkp = () => {
         <input type="text" value={value} onChange={onChange} />
         <button onClick={() => onSearch(value)}> Search </button>
         <h4>Search by animal type</h4>
-        <ul class="suggestions-list" role="navigation">
+        <ul className="suggestions-list" role="navigation">
           <li onClick={()=> setFilter("cat")}>cat friendly</li>
           <li onClick={()=> setFilter("dog")}>dog friendly</li>
+          <li onClick={()=> setFilter("")}>reset filter</li>
 
     </ul>
       </div>
@@ -46,7 +47,7 @@ const Checkp = () => {
         const myFilter = new RegExp(filter)
         return myFilter.test(plant.animalSafe)
       }).map(plant => (
-        <div>
+        <div key = {plant.name}>
           <h1>{plant.name}</h1>
           <p>{plant.animalSafe}</p>
         </div>
