@@ -9,15 +9,9 @@ import { BY_ANIMAL, BY_PLANTNAME } from '../../utils/queries';
 
 
 const Checkp = () => {
-  const data=[
-    { "full_name": "Farrel Hoggin" },
-    { "full_name": "Irma Olech" },
-    { "full_name": "Emmit Gallacher" },
-    { "full_name": "Dunn Astlet" },
-    { "full_name": "Burg Peaddie" },
-    { "full_name": "Molli Knoller" },]
 
   const [value, setValue] = useState("");
+  const {data, loading, refetch} = useQuery(BY_PLANTNAME, {variables: {name:value}})
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -25,9 +19,12 @@ const Checkp = () => {
 
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    // our api to fetch the search result
+     refetch()
     console.log("search ", searchTerm);
   };
+
+  console.log(data)
+  const plantInfo = data?.specificPlantS || []
 
   return (
     <div className='checkp'> 
@@ -38,7 +35,12 @@ const Checkp = () => {
         <input type="text" value={value} onChange={onChange} />
         <button onClick={() => onSearch(value)}> Search </button>
       </div>
-      <div className="dropdown">
+      {plantInfo.map(plant => (
+        <div>
+          <h1>{plant.name}</h1>
+        </div>
+      ))}
+      {/* <div className="dropdown">
         {data
           .filter((item) => {
             const searchTerm = value.toLowerCase();
@@ -60,7 +62,7 @@ const Checkp = () => {
               {item.full_name}
             </div>
           ))}
-      </div>
+      </div> */}
     </div>
   </div>
   <ul class="suggestions-list" role="navigation">
