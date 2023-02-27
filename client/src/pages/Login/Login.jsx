@@ -7,11 +7,8 @@ const Login = ()=>{
 <div className="login">
 <div className="card">
 <div className="left">
-    <h1>Hey! My friend</h1>
-    <span>you don't have an account?</span>
-    <button><Link style={{ textDecoration: 'none', color: 'white' }} to="/signin">
-    Register
-          </Link></button>
+    <h4>Welcome Pet Lovers!</h4>
+    
 
 </div>
 <div className="right">
@@ -20,6 +17,10 @@ const Login = ()=>{
 <input type="text" placeholder="Username"/>
 <input type="password" placeholder="Password"/>
 <button>Log in</button>
+<span>You don't have an account?</span>
+    <button><Link style={{ textDecoration: 'none', color: 'white' }} to="/signin">
+    Register
+          </Link></button>
     </form>
 </div>
 </div>
