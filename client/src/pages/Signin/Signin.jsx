@@ -1,14 +1,17 @@
 import React from "react";
 import"./Signin.scss";
+import { Link } from "react-router-dom";
 
 const Signin = ()=>{
     return(
 <div className="login">
 <div className="card">
 <div className="left">
-    <h1>Do you want to be friend with us?</h1>
+    <h1>How are you?</h1>
     <span>If you have an account, please log in.</span>
-    <button>Log in</button>
+    <button><Link style={{ textDecoration: 'none', color: 'white' }} to="/login">
+    login
+          </Link></button>
 </div>
 <div className="right">
     <h1>Sign in</h1>

@@ -1,7 +1,7 @@
-import React from 'react'
-import Categories from '../../components/Categories/Categories'
-import Contact from '../../components/Contact/Contact'
-import "./Checkp.scss"
+import React from 'react';
+import Searchlist from '../../components/Searchlist/Searchlist';
+import Contact from '../../components/Contact/Contact';
+import "./Checkp.scss";
 import { useState } from "react";
 
 const Checkp = () => {
@@ -24,12 +24,13 @@ const Checkp = () => {
     // our api to fetch the search result
     console.log("search ", searchTerm);
   };
-  return (
-    <div className='checkp'> <div className="App">
-    <h1>Search by plants name</h1>
 
+  return (
+    <div className='checkp'> 
+    <div className="App">
     <div className="search-container">
       <div className="search-inner">
+      <h2>search plant's name to see if this plant Safe for Cats and Dogs</h2>
         <input type="text" value={value} onChange={onChange} />
         <button onClick={() => onSearch(value)}> Search </button>
       </div>
@@ -58,8 +59,12 @@ const Checkp = () => {
       </div>
     </div>
   </div>
+  <ul class="suggestions-list" role="navigation">
+          <li><a href="/">cat friendly</a></li>
+          <li><a href="/">dog friendly</a></li>
 
-      <Categories/>
+    </ul>
+      <Searchlist/>
       <Contact/>
     </div>
   )

@@ -7,9 +7,9 @@ const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const data = [
-    "https://images.squarespace-cdn.com/content/v1/58ae1edf6b8f5b3f0835935a/1633792426568-MA8F8CLBYX7Q1L9NL9OB/IMG_3501.JPG?format=1500w",
-    "https://images.pexels.com/photos/12034442/pexels-photo-12034442.jpeg",
-    "https://images.pexels.com/photos/6231613/pexels-photo-6231613.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "img/catplant2.jpeg",
+    "img/5.PNG",
+    "img/plants-4.jpg",
   ];
 
   const prevSlide = () => {
