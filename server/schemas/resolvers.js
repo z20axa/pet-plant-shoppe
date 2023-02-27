@@ -123,7 +123,7 @@ const resolvers = {
     // search for plants safety by plant name - needs to be improved
 
     specificPlantS: async (_, { name }) => {
-      Plant.find({ name: new RegExp(name) });
+      return Plant.find({ name: new RegExp(name) });
     },
   },
 

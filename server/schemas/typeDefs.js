@@ -62,7 +62,7 @@ const typeDefs = gql`
     me: User
     inStore:[Plant]
     specificPlantA(name:String, animalSafe: String!):[Plant]
-    specificPlantS(name:String!):[Plant]
+    specificPlantS(name:String):[Plant]
     order(_id: ID!): Order
     checkout(plants: [ID]!): Checkout
     getStripeKey: StripeKey

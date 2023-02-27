@@ -39,7 +39,7 @@ query SpecificPlantA($animalSafe: String!) {
 
 //search by name of the plant  - will tell if it is safe or not
 export const BY_PLANTNAME = gql`
-query searchByName($name: String!) {
+query searchByName($name: String) {
   specificPlantS(name: $name) {
     name
     animalSafe
