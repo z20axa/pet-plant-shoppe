@@ -1,0 +1,88 @@
+.login {
+    height: 100vh;
+    background-color: beige;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .card {
+        width: 50%;
+        display: flex;
+        background-color: rgb(93, 168, 18);
+        border-radius: 10px;
+        min-height: 600px;
+        overflow:hidden;
+
+        .left {
+            flex: 1;
+            background:url("https://i0.wp.com/dallavita.com/wp-content/uploads/2018/06/24302096_10159705940270080_3001839481481140825_o.jpg?w=2000&ssl=1");
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-size: medium;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            font-weight: 600;
+            color: rgb(250, 246, 246);
+
+            h1 {
+                font: size 80px;
+                line-height: 100px;
+                color: rgb(55, 59, 55);
+                padding: 1%;
+                opacity: 90%;
+            }
+
+            span {
+                font-size: 14px;
+            }
+
+            button {
+                width: 50%;
+                padding: 10px;
+                border: none;
+                background-color: aliceblue;
+                color: rgb(4, 19, 14);
+                cursor: pointer;
+                text-align: center;
+            }
+        }
+
+        .right {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+
+            h1 {
+                color: rgb(10, 11, 11)
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+
+
+                input {
+                    border: none;
+                    border-bottom: 1px solid lightgrey;
+                    padding: 20px 10px;
+                }
+
+                button {
+                    width: 50%;
+                    padding: 10px;
+                    border: none;
+                    background-color: rgb(7, 8, 7);
+                    color: white;
+                    font-weight: bold;
+                    margin: auto;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

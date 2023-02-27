@@ -10,10 +10,11 @@
     "air": "air-cleaning",
     "careLevel": "easy",
     "animalSafe": "Cats",
+    "image": "/Users/nataliavenkatesh/bootcamp/pet-plant-shoppe/client/public/img/plants-5.jpg",
     "plantAuthor": "Kent Beck"
   },
   {
-    "name": "Africa Violet",
+    "name": "African Violet",
     "description": "African violets are one of the world's most popular houseplants and for good reason. These compact, low-growing plants flower several times a year, and they are available in a multitude of leaf forms and colors.",
     "price": 10.0,
     "inStore": true,

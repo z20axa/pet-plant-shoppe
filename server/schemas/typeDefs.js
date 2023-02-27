@@ -43,11 +43,11 @@ const typeDefs = gql`
     user: User
   }
 
-  #type Order {
-    #_id: ID
-   # purchaseDate: String
-    #products: [Product]
-  #}
+  type Order {
+    _id: ID
+    purchaseDate: String
+    plants: [Plant]
+  }
 
   type Checkout {
     session: ID
@@ -62,23 +62,24 @@ const typeDefs = gql`
     inStore:[Plant]
     specificPlantA(name:String, animalSafe: String!):[Plant]
     specificPlantS(name:String!):[Plant]
-    #order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
+    order(_id: ID!): Order
+    checkout(plants: [ID]!): Checkout
     getStripeKey: StripeKey
   }
   
   type Mutation {
     seed: String
     addUser(username: String!, email: String!, password: String!): Auth
+    removeUser(_id: ID): Auth
     # this login matches the token in the resolvers.js
     login(email: String!, password: String!): Auth
     addFavorite(plantId: ID!): User
     removeFavorite(plantId: ID!): User
     addComment(plantId: ID!, comment_text: String!): Plant
     removeComment(plantId: ID!, commentId: ID!): Plant
-    #addOrder(products: [ID]!): Order
+    addOrder(plants: [ID]!): Order
     
-    #purchase plant needs to be created 
+   
    
  
   }

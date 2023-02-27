@@ -40,7 +40,7 @@ The following image shows the finished product
 
 Here is the link of the finished work: 
 
-[Deployed website]()|
+[Deployed website](https://pet-plant-shoppe-z20axa.herokuapp.com/)
 
 
 ## Credits

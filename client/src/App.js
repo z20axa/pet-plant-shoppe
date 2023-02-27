@@ -1,10 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
-import Product from "./pages/Product/Product";
 import Products from "./pages/Products/Products";
+import Signin from "./pages/Signin/Signin";
+import Login from "./pages/Login/Login";
+import Ourpro from "./pages/Ourpro/Ourpro";
+import Checkp from "./pages/Checkp/Checkp";
+
+
 import "./app.scss"
 
 const Layout = () => {
@@ -27,13 +32,32 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/products/:id",
-        element: <Products />,
+        path: "/Products",
+        element: <Products/>,
+      },
+  
+      {
+        path: "/threepawsClub",
+        element: <threepawsClub/>,
+      },
+ 
+      {
+        path: "/Ourpro",
+        element: <Ourpro/>,
       },
       {
-        path: "/product/:id",
-        element: <Product />,
+        path: "/Signin",
+        element: <Signin/>,
       },
+      {
+        path: "/Login",
+        element: <Login/>,
+      },
+      {
+        path: "/Checkp",
+        element: <Checkp/>,
+      },
+
     ],
   },
 ]);
