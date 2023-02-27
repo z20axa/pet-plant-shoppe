@@ -160,6 +160,14 @@ const resolvers = {
       return { token, user };
     },
 
+    removeUser: async (parent, {_id}, context)=> {
+      const user = await User.findOne({ _id });
+      return User.findOneAndDelete(
+        { _id: context.user._id },
+        { new: true }
+      );
+    },
+
     // login in existing user
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });

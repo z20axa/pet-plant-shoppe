@@ -36,5 +36,21 @@ mutation addComment ($plantId: ID!, $commentText: String!) {
 `;
 
 export const ADD_FAV = gql`
-mutation addFavorite 
+mutation AddFavorite($plantId: ID!) {
+  addFavorite(plantId: $plantId) {
+    _id
+    plant {
+      _id
+    }
+  }
+}
 `
+
+export const REMOVE_FAV = gql`
+mutation removeFav($plantId: ID!) {
+  removeFavorite(plantId: $plantId) {
+    _id
+  }
+}
+`
+

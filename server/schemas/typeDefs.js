@@ -70,6 +70,7 @@ const typeDefs = gql`
   type Mutation {
     seed: String
     addUser(username: String!, email: String!, password: String!): Auth
+    removeUser(_id: ID): Auth
     # this login matches the token in the resolvers.js
     login(email: String!, password: String!): Auth
     addFavorite(plantId: ID!): User
@@ -78,7 +79,7 @@ const typeDefs = gql`
     removeComment(plantId: ID!, commentId: ID!): Plant
     addOrder(plants: [ID]!): Order
     
-    #purchase plant needs to be created 
+   
    
  
   }
