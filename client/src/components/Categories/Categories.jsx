@@ -2,6 +2,7 @@ import React from "react";
 import "./Categories.scss";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import plantImage from '../../plant_images/africanViolet.png'
 
 import {IN_STORE} from '../../utils/queries';
 
@@ -24,7 +25,7 @@ const Categories = () => {
        
 
           <img
-            src="plant images/africanViolet.png"
+            src={plantImage}
             alt=""
           />
           <button>
@@ -36,7 +37,7 @@ const Categories = () => {
         </div>
         <div className="row">
           <img
-            src="plant images/birdsNestfern.png"
+            src={'../../plant_images/africanViolet.png'}
             alt=""
           />
           <button>
