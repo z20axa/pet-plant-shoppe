@@ -11,6 +11,7 @@ import { BY_ANIMAL, BY_PLANTNAME } from '../../utils/queries';
 const Checkp = () => {
 
   const [value, setValue] = useState("");
+  const [filter, setFilter]= useState("")
   const {data, loading, refetch} = useQuery(BY_PLANTNAME, {variables: {name:value}})
 
   const onChange = (event) => {
@@ -34,10 +35,20 @@ const Checkp = () => {
       <h2>search plant's name to see if this plant Safe for Cats and Dogs</h2>
         <input type="text" value={value} onChange={onChange} />
         <button onClick={() => onSearch(value)}> Search </button>
+        <h4>Search by animal type</h4>
+        <ul class="suggestions-list" role="navigation">
+          <li onClick={()=> setFilter("cat")}>cat friendly</li>
+          <li onClick={()=> setFilter("dog")}>dog friendly</li>
+
+    </ul>
       </div>
-      {plantInfo.map(plant => (
+      {plantInfo.filter(plant => {
+        const myFilter = new RegExp(filter)
+        return myFilter.test(plant.animalSafe)
+      }).map(plant => (
         <div>
           <h1>{plant.name}</h1>
+          <p>{plant.animalSafe}</p>
         </div>
       ))}
       {/* <div className="dropdown">
@@ -65,11 +76,7 @@ const Checkp = () => {
       </div> */}
     </div>
   </div>
-  <ul class="suggestions-list" role="navigation">
-          <li><a href="/">cat friendly</a></li>
-          <li><a href="/">dog friendly</a></li>
 
-    </ul>
       <Searchlist/>
       <Contact/>
     </div>
