@@ -56,6 +56,13 @@ const plantSchema = new Schema({
     type: String,
     required: true,
   },
+  image: {
+    url:{
+      type: String,
+      required: true
+    }
+
+  },
   comments: [
     {
       comment_text: {
