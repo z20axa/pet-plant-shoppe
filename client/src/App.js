@@ -18,7 +18,7 @@ import Login from "./pages/Login/Login";
 import Ourpro from "./pages/Ourpro/Ourpro";
 import Checkp from "./pages/Checkp/Checkp";
 import Userprofile from "./pages/Userprofile/Userprofile";
-// import Threep from "./pages/Threep/Threep";
+import Threep from "./pages/Threep/Threep";
 
 
 import "./app.scss"
@@ -76,10 +76,10 @@ const router = createBrowserRouter([
         path: "/product/:id",
         element: <Product/>,
       },
-      // {
-      //   path: "/Threep",
-      //   element: <Threep/>,
-      // },
+      {
+        path: "/Threep",
+        element: <Threep/>,
+      },
  
       {
         path: "/ourpro",

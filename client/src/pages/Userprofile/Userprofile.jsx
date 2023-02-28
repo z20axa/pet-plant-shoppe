@@ -17,12 +17,12 @@ const Profile = () => {
   const { loading, data } = useQuery(ME)
 //console.log(data)
   // Check if data is returning from the `BY_PLANTNAME` query, then the `ALL_PLANTS` query
-  const profile = data?.me || data?.profile || {};
+  const profile = data?.me || data?.user || {};
   console.log(data)
   // Use React Router's `<Redirect />` component to redirect to personal profile page if username is yours
-  //if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
-   // return <Navigate to="/me" />;
- // }
+  if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
+   return <Navigate to="/me" />;
+ }
 if(!Auth.loggedIn()){
   return <h1>You must be logged in</h1>
 }
@@ -42,17 +42,12 @@ if(!Auth.loggedIn()){
     <div>
       <h2 className="card-header">Hello {profile.username}!
       </h2>
+<p> List of your Favorite Plants</p>
+      {profile.plant.map(plant=>
+        (plant.name)
+        
+        )}
 
-      {/* {profile.skills?.length > 0 && (
-        <SkillsList
-          skills={profile.skills}
-          isLoggedInUser={!profileId && true}
-        />
-      )}
-
-      <div className="my-4 p-4" style={{ border: '1px dotted #1a1a1a' }}>
-        <SkillForm profileId={profile._id} />
-      </div> */}
     </div>
   );
 };
