@@ -35,22 +35,24 @@ const Checkp = () => {
       <h2>search plant's name to see if this plant Safe for Cats and Dogs</h2>
         <input type="text" value={value} onChange={onChange} />
         <button onClick={() => onSearch(value)}> Search </button>
-        <h4>Search by animal type</h4>
+        <button onClick={() => window.location.reload(false)}>Refresh</button>
+        <h4>Search by pet type</h4>
         <ul className="suggestions-list" role="navigation">
           <li onClick={()=> setFilter("cat")}>cat friendly</li>
           <li onClick={()=> setFilter("dog")}>dog friendly</li>
-          <li onClick={()=> setFilter("")}>reset filter</li>
 
     </ul>
       </div>
+      <div className="result">
       {plantInfo.filter(plant => {
         const myFilter = new RegExp(filter)
         return myFilter.test(plant.animalSafe)
       }).map(plant => (
         <div key = {plant.name}>
           <h1>{plant.name}</h1>
-          <p>{plant.animalSafe}</p>
+          <h2>{plant.animalSafe}</h2>
         </div>
+        
       ))}
       {/* <div className="dropdown">
         {data
@@ -76,6 +78,7 @@ const Checkp = () => {
           ))}
       </div> */}
     </div>
+  </div>
   </div>
 
       <Searchlist/>

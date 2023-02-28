@@ -3,6 +3,7 @@ import CategoryList from "./CategoryList";
 import { useQuery } from "@apollo/client";
 import { IN_STORE } from "../../utils/queries";
 
+
 export default function CategoryQ(props){
     const { loading, data } = useQuery(IN_STORE, {
         variables: {
