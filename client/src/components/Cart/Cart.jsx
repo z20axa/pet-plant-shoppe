@@ -1,6 +1,8 @@
 import React from "react";
 import "./Cart.scss";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { useLazyQuery } from '@apollo/client';
+import { QUERY_CHECKOUT } from '../../utils/queries';
 import { useSelector } from "react-redux";
 import { removeItem, resetCart } from "../../redux/cartReducer";
 import { useDispatch } from "react-redux";
@@ -10,6 +12,19 @@ import { loadStripe } from "@stripe/stripe-js";
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
+  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+
+//
+
+// useEffect(() => {
+//   if (data) {
+//     stripePromise.then((res) => {
+//       res.redirectToCheckout({ sessionId: data.checkout.session });
+//     });
+//   }
+// }, [data]);
+
+//
 
   const totalPrice = () => {
     let total = 0;
@@ -23,17 +38,29 @@ const Cart = () => {
     "pk_test_eOTMlr8usx1ctymXqrik0ls700lQCsX2UB"
   );
   const handlePayment = async () => {
-    try {
-      const stripe = await stripePromise;
-      const res = await makeRequest.post("/orders", {
-        products,
-      });
-      await stripe.redirectToCheckout({
-        sessionId: res.data.stripeSession.id,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   const stripe = await stripePromise;
+    //   const res = await makeRequest.post("/orders", {
+    //     products,
+    //   });
+    //   await stripe.redirectToCheckout({
+    //     sessionId: res.data.stripeSession.id,
+    //   });
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    const productIds = [];
+    console.log(products)
+    products.forEach((item) => {
+      for (let i = 0; i < item.quantity; i++) {
+        productIds.push(item._id);
+      }
+    });
+
+    getCheckout({
+      variables: { products: productIds },
+    });
+
   };
   return (
     <div className="cart">

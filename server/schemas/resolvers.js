@@ -1,7 +1,8 @@
 const { User, Plant, Order } = require("../models");
 const { signToken } = require("../utils/auth");
 require('dotenv').config();
-
+//Stripe key 
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 const userSeeds = require("../seeders/userSeeds.json");
 const plantSeeds = require("../seeders/plantsSeeds.json");
 
@@ -36,6 +37,7 @@ const resolvers = {
       return {
         key: process.env.bestripeKey,
       };
+      
     },
 
     // order query for plants for purchase
