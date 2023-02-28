@@ -70,10 +70,10 @@ const router = createBrowserRouter([
         path: "/product/:id",
         element: <Product/>,
       },
-      {
-        path: "/Threep",
-        element: <Threep/>,
-      },
+      // {
+      //   path: "/Threep",
+      //   element: <Threep/>,
+      // },
  
       {
         path: "/ourpro",
