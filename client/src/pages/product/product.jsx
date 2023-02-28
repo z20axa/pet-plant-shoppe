@@ -1,5 +1,5 @@
 import React from "react";
-//import { useState } from "react";
+import { useState } from "react";
 import "./Product.scss";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -13,7 +13,7 @@ import { FIND_PLANT } from "../../utils/queries";
 const Product = () => {
   const id = useParams().id;
 
-  // const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const { data, loading } = useQuery(FIND_PLANT, {
     variables: { plantId: id },
   });
@@ -22,7 +22,7 @@ const Product = () => {
 
   const dispatch = useDispatch();
 
-  console.log(data);
+  console.log(plantInfo);
   return (
     <div>
       {loading ? (
@@ -36,26 +36,27 @@ const Product = () => {
             <h1>{plantInfo.light}</h1>
             <h1>{plantInfo.price}</h1>
             <div>
-              <img src={plantInfo.imageUrl} alt={plant.name} />
+              <img src={plantInfo.imageUrl} alt={plantInfo.name} />
             </div>
           </div>
           <div>
-            {/* <button
-                onClick={() =>
-                  setQuantity((prev) => (prev === 1 ? 1 : prev - 1))
-                }
-              >
-                -
-              </button>
-              {quantity}
-              <button onClick={() => setQuantity((prev) => prev + 1)}>+</button> */}
+            <button
+              onClick={() => setQuantity((prev) => (prev === 1 ? 1 : prev - 1))}
+            >
+              -
+            </button>
+            {quantity}
+            <button onClick={() => setQuantity((prev) => prev + 1)}>+</button>
           </div>
-          <button className="add" onClick={() => dispatch(addToCart({}))}>
+          <button
+            className="add"
+            onClick={() => dispatch(addToCart({ plant: plantInfo, quantity }))}
+          >
             <AddShoppingCartIcon /> ADD TO CART
           </button>
           <div className="links">
             <div className="item">
-              <FavoriteBorderIcon /> ADD TO WISH LIST
+              <FavoriteBorderIcon /> ADD TO FAVORITES
             </div>
 
             <button>Save</button>
