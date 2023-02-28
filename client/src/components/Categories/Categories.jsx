@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Categories.scss";
 
 import CategoryQ from "./CategoryQ";
 
