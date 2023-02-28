@@ -7,8 +7,9 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { FIND_PLANT } from "../../utils/queries";
+import { ADD_FAV } from "../../utils/mutations";
 
 const Product = () => {
   const id = useParams().id;
@@ -17,11 +18,15 @@ const Product = () => {
   const { data, loading } = useQuery(FIND_PLANT, {
     variables: { plantId: id },
   });
+  const [addFav, {error}] = useMutation(ADD_FAV)
 
   const plantInfo = data?.plant || {};
 
   const dispatch = useDispatch();
-
+function addingToFave(){
+  addFav({variables: {plantId : plantInfo._id }})
+  console.log("adding")
+}
   console.log(plantInfo);
   return (
     <div>
@@ -29,14 +34,14 @@ const Product = () => {
         <h1>Loading...</h1>
       ) : (
         <div>
-          <div>
+          <div className="plantCard">
             <h1>{plantInfo.name}</h1>
             <h1>{plantInfo.description}</h1>
             <h1>{plantInfo.careLevel}</h1>
             <h1>{plantInfo.light}</h1>
             <h1>{plantInfo.price}</h1>
             <div>
-              <img src={plantInfo.imageUrl} alt={plantInfo.name} />
+              <img src={plantInfo.imageUrl} alt={plantInfo.name} className="cardImage" />
             </div>
           </div>
           <div>
@@ -55,7 +60,7 @@ const Product = () => {
             <AddShoppingCartIcon /> ADD TO CART
           </button>
           <div className="links">
-            <div className="item">
+            <div className="item" onClick={()=> addingToFave()}>
               <FavoriteBorderIcon /> ADD TO FAVORITES
             </div>
 
