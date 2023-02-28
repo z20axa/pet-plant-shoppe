@@ -33,7 +33,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="center">
-          <img src="img/Logo.png" alt="" width="50" height="60" />
+          <img src="/img/Logo.png" alt="" width="50" height="60" />
           <Link className="link" to="/">Perfect Pet Plant Shoppe</Link>
         </div>
         <div className="right">

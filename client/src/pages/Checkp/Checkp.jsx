@@ -44,7 +44,7 @@ const Checkp = () => {
     </ul>
       </div>
       <div className="result">
-      {plantInfo.filter(plant => {
+      {value && plantInfo.filter(plant => {
         const myFilter = new RegExp(filter)
         return myFilter.test(plant.animalSafe)
       }).map(plant => (

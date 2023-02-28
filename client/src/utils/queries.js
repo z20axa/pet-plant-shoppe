@@ -62,6 +62,24 @@ query Plant($plantId: ID!) {
 }
 `
 
+export const ME = gql`
+query me{
+ me {
+   _id
+   email
+   username
+   plant {
+     _id
+     air
+     animalSafe
+     plantAuthor
+     description
+     name
+   }
+ }
+}
+`
+
 
 
 
