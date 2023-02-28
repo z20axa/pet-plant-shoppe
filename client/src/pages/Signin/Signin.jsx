@@ -77,9 +77,9 @@ const Signin = () => {
                 <div className="right">
                     <h1>Sign in</h1>
                     <form onSubmit={handleFormSubmit}>
-                        <input type="text" onChange={handleInputChange} value={userFormData.username} placeholder="Username" />
-                        <input type="email" onChange={handleInputChange} value={userFormData.email} placeholder="Email" />
-                        <input type="password" onChange={handleInputChange} value={userFormData.password} placeholder="Password" />
+                        <input type="text" name="username" onChange={handleInputChange} value={userFormData.username} placeholder="Username" />
+                        <input type="email" name="email" onChange={handleInputChange} value={userFormData.email} placeholder="Email" />
+                        <input type="password" name="password" onChange={handleInputChange} value={userFormData.password} placeholder="Password" />
                         <button>Sign in</button>
                     </form>
                 </div>
