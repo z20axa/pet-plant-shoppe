@@ -92,6 +92,7 @@ const resolvers = {
     },
 
     // query to separate only plants sold in store in DB
+    //Query is returning nothing
     inStore: async (parent, { name }) => {
       return Plant.find({ inStore: true });
     },
