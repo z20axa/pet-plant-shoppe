@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import "./Signin.scss";
 import { Link } from "react-router-dom";
 
+
+
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
 
@@ -75,12 +77,13 @@ const Signin = () => {
                     </Link></button>
                 </div>
                 <div className="right">
-                    <h1>Sign in</h1>
+                    <h1>Sign up</h1>
                     <form onSubmit={handleFormSubmit}>
                         <input type="text" name="username" onChange={handleInputChange} value={userFormData.username} placeholder="Username" />
                         <input type="email" name="email" onChange={handleInputChange} value={userFormData.email} placeholder="Email" />
                         <input type="password" name="password" onChange={handleInputChange} value={userFormData.password} placeholder="Password" />
-                        <button>Sign in</button>
+                        <button><Link style={{ textDecoration: 'none', color: 'white' }} to="/login">
+                            Login</Link></button>
                     </form>
                 </div>
             </div>
@@ -89,4 +92,5 @@ const Signin = () => {
     )
 }
 
-export default Signin
+
+export default Signin;
