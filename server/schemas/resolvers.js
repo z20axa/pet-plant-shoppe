@@ -21,6 +21,7 @@ const resolvers = {
 
     //???? - sorts by time of creation - could use it in comment section
     plants: async (parent, { username }) => {
+      return Plant.find()
       const params = username ? { username } : {};
       return Plant.find(params).sort({ createdAt: -1 });
     },
@@ -116,13 +117,13 @@ const resolvers = {
         name: { $regex: new RegExp(name), $options: "i" },
         animalSafe: animalSafeValue,
       });
-      // return safeOrnot;
+      return safeOrnot;
     },
 
     // search for plants safety by plant name - needs to be improved
 
     specificPlantS: async (_, { name }) => {
-      Plant.find({ name: new RegExp(name) });
+      return Plant.find({ name: new RegExp(name) });
     },
   },
 

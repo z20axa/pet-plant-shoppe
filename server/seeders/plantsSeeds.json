@@ -10,7 +10,8 @@
     "air": "air-cleaning",
     "careLevel": "easy",
     "animalSafe": "Cats",
-    "image": "/Users/nataliavenkatesh/bootcamp/pet-plant-shoppe/client/public/img/plants-5.jpg",
+   "imageUrl": 
+    "/plantimages/spiderPlant.png",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -24,6 +25,8 @@
     "air": "none",
     "careLevel": "easy",
     "animalSafe": "cats/dogs",
+    "imageUrl": 
+    "/plantimages/africanViolet.png",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -37,6 +40,8 @@
     "air": "none",
     "careLevel": "easy",
     "animalSafe": "cats/dogs",
+    "imageUrl": 
+    "/plantimages/bostonFern.png",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -50,6 +55,8 @@
     "air": "air-cleaning",
     "careLevel": "easy",
     "animalSafe": "cats/dogs",
+    "imageUrl": 
+    "/plantimages/parlotPalm.png",
     "plantAuthor": "Kent Beck"
   },
 
@@ -64,6 +71,8 @@
     "air": "air-cleaning",
     "careLevel": "moderate",
     "animalSafe": "cats",
+    "imageUrl": 
+    "/plantimages/calatheaOrnata.png",
     "plantAuthor": "Kent Beck"
   },
 
@@ -78,6 +87,8 @@
     "air": "air-cleaning",
     "careLevel": "moderate",
     "animalSafe": "dogs",
+    "imageUrl": 
+    "/plantimages/orchid.png",
     "plantAuthor": "Kent Beck"
   },
 
@@ -92,6 +103,8 @@
     "air": "air-cleaning",
     "careLevel": "easy",
     "animalSafe": "cats",
+    "imageUrl": 
+    "/plantimages/watermelonPeperomia.png",
     "plantAuthor": "Kent Beck"
   },
 
@@ -106,6 +119,8 @@
     "air": "air-cleaning",
     "careLevel": "easy",
     "animalSafe": "cats",
+    "imageUrl": 
+    "/plantimages/christmasCactus.png",
     "plantAuthor": "Kent Beck"
   },
 
@@ -120,6 +135,8 @@
     "air": "air-cleaning",
     "careLevel": "moderate",
     "animalSafe": "cats/dogs",
+    "imageUrl": 
+    "/plantimages/moneyTree.png",
     "plantAuthor": "Kent Beck"
   },
 
@@ -134,6 +151,8 @@
     "air": "air-cleaning",
     "careLevel": "easy",
     "animalSafe": "cats/dogs",
+    "imageUrl": 
+    "/plantimages/birdsNestfern.png",
     "plantAuthor": "Kent Beck"
   },
 
@@ -148,6 +167,8 @@
     "air": "air-cleaning",
     "careLevel": "easy",
     "animalSafe": "cats/dogs",
+    "imageUrl": 
+    "/plantimages/hinduRopeplant.png",
     "plantAuthor": "Kent Beck"
   },
 
@@ -162,6 +183,8 @@
     "air": "air-cleaning",
     "careLevel": "moderate",
     "animalSafe": "dogs",
+    "imageUrl": 
+    "/plantimages/prayerPlant.png",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -175,6 +198,7 @@
     "air": "   ",
     "careLevel": "  ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -188,6 +212,7 @@
     "air": "   ",
     "careLevel": "   ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -201,6 +226,7 @@
     "air": "   ",
     "careLevel": "   ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -214,6 +240,7 @@
     "air": "   ",
     "careLevel": "    ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -227,6 +254,7 @@
     "air": "  ",
     "careLevel": "    ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -240,6 +268,7 @@
     "air": "   ",
     "careLevel": "   ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -253,6 +282,7 @@
     "air": "   ",
     "careLevel": "   ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -266,6 +296,7 @@
     "air": "  ",
     "careLevel": "   ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -279,6 +310,7 @@
     "air": "  ",
     "careLevel": "  ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -292,6 +324,7 @@
     "air": "  ",
     "careLevel": "  ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -305,6 +338,7 @@
     "air": "  ",
     "careLevel": "  ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   },
   {
@@ -318,6 +352,7 @@
     "air": "   ",
     "careLevel": "  ",
     "animalSafe": "not safe",
+    "imageUrl": "   ",
     "plantAuthor": "Kent Beck"
   }
 

@@ -3,17 +3,16 @@ import Searchlist from '../../components/Searchlist/Searchlist';
 import Contact from '../../components/Contact/Contact';
 import "./Checkp.scss";
 import { useState } from "react";
+import { useQuery } from "@apollo/client";
+import { BY_ANIMAL, BY_PLANTNAME } from '../../utils/queries';
+
+
 
 const Checkp = () => {
-  const data=[
-    { "full_name": "Farrel Hoggin" },
-    { "full_name": "Irma Olech" },
-    { "full_name": "Emmit Gallacher" },
-    { "full_name": "Dunn Astlet" },
-    { "full_name": "Burg Peaddie" },
-    { "full_name": "Molli Knoller" },]
 
   const [value, setValue] = useState("");
+  const [filter, setFilter]= useState("")
+  const {data, loading, refetch} = useQuery(BY_PLANTNAME, {variables: {name:value}})
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -21,9 +20,12 @@ const Checkp = () => {
 
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    // our api to fetch the search result
+     refetch()
     console.log("search ", searchTerm);
   };
+
+  console.log(data)
+  const plantInfo = data?.specificPlantS || []
 
   return (
     <div className='checkp'> 
@@ -33,8 +35,24 @@ const Checkp = () => {
       <h2>search plant's name to see if this plant Safe for Cats and Dogs</h2>
         <input type="text" value={value} onChange={onChange} />
         <button onClick={() => onSearch(value)}> Search </button>
+        <h4>Search by animal type</h4>
+        <ul className="suggestions-list" role="navigation">
+          <li onClick={()=> setFilter("cat")}>cat friendly</li>
+          <li onClick={()=> setFilter("dog")}>dog friendly</li>
+          <li onClick={()=> setFilter("")}>reset filter</li>
+
+    </ul>
       </div>
-      <div className="dropdown">
+      {plantInfo.filter(plant => {
+        const myFilter = new RegExp(filter)
+        return myFilter.test(plant.animalSafe)
+      }).map(plant => (
+        <div key = {plant.name}>
+          <h1>{plant.name}</h1>
+          <p>{plant.animalSafe}</p>
+        </div>
+      ))}
+      {/* <div className="dropdown">
         {data
           .filter((item) => {
             const searchTerm = value.toLowerCase();
@@ -56,14 +74,10 @@ const Checkp = () => {
               {item.full_name}
             </div>
           ))}
-      </div>
+      </div> */}
     </div>
   </div>
-  <ul class="suggestions-list" role="navigation">
-          <li><a href="/">cat friendly</a></li>
-          <li><a href="/">dog friendly</a></li>
 
-    </ul>
       <Searchlist/>
       <Contact/>
     </div>
