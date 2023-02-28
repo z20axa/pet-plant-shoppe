@@ -17,7 +17,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.10",
     "concurrently": "^7.6.0",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1"
   }
 }
