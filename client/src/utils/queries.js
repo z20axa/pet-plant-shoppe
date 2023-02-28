@@ -14,20 +14,15 @@ query Plants {
 `;
 // shows only plants we sell
 export const IN_STORE = gql`
-query InStore($inStore: String!) {
-  inStore(inStore: $inStore) {
+query InStore {
+  inStore {
     name
-    soilRequirement
-    air
-    animalSafe
-    careLevel
-    description
-    growthHabit
-    light
-    price
+    imageUrl
+    _id
   }
 }
 `;
+
 // search by animal - will bring alll results for dogs or cats or both
 export const BY_ANIMAL = gql`
 query SpecificPlantA($animalSafe: String!) {

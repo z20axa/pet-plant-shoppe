@@ -24,8 +24,8 @@ const typeDefs = gql`
     light: String,
     air: String,
     comments: [Comment]!
-    #image: 
-    inStore: String!
+    imageUrl: String!
+    inStore: Boolean!
   }
 
   type StripeKey {
