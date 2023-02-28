@@ -57,6 +57,7 @@ query Plant($plantId: ID!) {
     name
     price
     soilRequirement
+    imageUrl
   }
 }
 `

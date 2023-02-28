@@ -13,11 +13,13 @@ export default function CategoryList({plants}){
 
               {plants.map((plant, index) => (
                 <div key ={index}>
-                 
+                 <Link
+                 to={`/Product/${plant._id}`}>
                   <div><img src={plant.imageUrl} alt={plant.name}/></div>
+                  </Link>
 
                   <div>{plant._id}</div>
-                  <Link
+                  {/* <Link
                   className ="text-light"
                   to={`/plants/${plant._id}`}>
                        <div>
@@ -30,7 +32,7 @@ export default function CategoryList({plants}){
               <img src={plantInfo.imageUrl} alt={plant.name} />
             </div>
           </div>
-                  </Link>
+                  </Link> */}
                   
                  
 
