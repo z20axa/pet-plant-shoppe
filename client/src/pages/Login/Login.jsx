@@ -63,14 +63,14 @@ const Login = () => {
                     <h1>Hey! My friend</h1>
                 </div>
                 <div className="right">
-                    <h1>Log in</h1>
+                    <h1>Existing Users</h1>
                     <form onSubmit={handleFormSubmit}>
                         <input type="text" name="email" onChange={handleInputChange} value={userFormData.email} placeholder="Email" />
                         <input type="password" name="password" onChange={handleInputChange} value={userFormData.password} placeholder="Password" />
-                        <span>Don't have an account?</span>
-                        <button><Link style={{ textDecoration: 'none', color: 'white' }} to="/signin">
-                            Sign Up
-                        </Link></button>
+                      
+                        <button>
+                            Sign In
+                        </button>
                     </form>
                 </div>
             </div>

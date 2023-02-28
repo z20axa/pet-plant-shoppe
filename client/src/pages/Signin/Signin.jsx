@@ -51,6 +51,7 @@ const Signin = () => {
             });
             console.log(data);
             Auth.login(data.addUser.token);
+
         } catch (err) {
             console.error(err);
         }
@@ -78,11 +79,22 @@ const Signin = () => {
                         <input type="text" name="username" onChange={handleInputChange} value={userFormData.username} placeholder="Username" />
                         <input type="email" name="email" onChange={handleInputChange} value={userFormData.email} placeholder="Email" />
                         <input type="password" name="password" onChange={handleInputChange} value={userFormData.password} placeholder="Password" />
-                        <span>If you have an account, please log in.</span>
+
+                        <button className="btn btn-primary btn-block py-3" type="submit">
+                ENTER
+                
+              </button>
+
+
+                        {/* <span>If you have an account, please log in.</span>
                         <button><Link style={{ textDecoration: 'none', color: 'white' }} to="/login">
-                            Log In
-                        </Link></button>
+                            Login
+                        </Link></button> */}
                     </form>
+                    <span>If you have an account, please log in.</span>
+                        <button><Link style={{ textDecoration: 'none', color: 'white' }} to="/login">
+                            Login
+                        </Link></button>
                 </div>
             </div>
         </div>

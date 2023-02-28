@@ -18,7 +18,7 @@ export default function CategoryList({plants}){
                   <div><img src={plant.imageUrl} alt={plant.name}/></div>
                   </Link>
 
-                  <div>{plant._id}</div>
+                  {/* <div>{plant._id}</div> */}
                   {/* <Link
                   className ="text-light"
                   to={`/plants/${plant._id}`}>
