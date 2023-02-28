@@ -12,11 +12,12 @@ import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
-import Product from "./pages/product/product";
+import Product from "./pages/Product/Product";
 import Signin from "./pages/Signin/Signin";
 import Login from "./pages/Login/Login";
 import Ourpro from "./pages/Ourpro/Ourpro";
 import Checkp from "./pages/Checkp/Checkp";
+import Threep from "./pages/Threep/Threep";
 
 
 import "./app.scss"
@@ -70,8 +71,8 @@ const router = createBrowserRouter([
         element: <Product/>,
       },
       {
-        path: "/threepawsclub",
-        element: <threepawsClub/>,
+        path: "/Threep",
+        element: <Threep/>,
       },
  
       {
