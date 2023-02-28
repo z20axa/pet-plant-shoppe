@@ -1,26 +1,25 @@
 import React, { useState } from "react";
 import CategoryList from "./CategoryList";
 import { useQuery } from "@apollo/client";
-import { IN_STORE } from "../../utils/queries";
+import { FIND_PLANT } from "../../utils/queries";
 
-export default function CategoryQ(props){
-    const { loading, data } = useQuery(IN_STORE, {
+export default function productQ(props){
+    const { loading, data } = useQuery(FIND_PLANT, {
         variables: {
-          "inStore": true
+          "id": "String!"
         }
       });
-      const plants = data?.inStore || [];
-// const loading = false;
-// const plants = [{_id: "1", "name": "Fern", "imageUrl": "tbd"}]
+      const plant = data?.id || [];
+
     return (
         <>
         
         { loading ? (
         <p>Still loading</p>
       ) : (
-        <Plant
+        <productData
 
-        plants={plants}
+        plants={plant}
         
          />
       )
