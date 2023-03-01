@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import LoginIcon from '@mui/icons-material/Login';
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
@@ -69,12 +69,12 @@ const Navbar = () => {
                 <p className="center" onClick={() => Auth.logout()}>LOGOUT</p>
               ) : (
                 <IconButton href="/Signin">
-                  <PersonOutlineOutlinedIcon />
+                  < LoginIcon />
                 </IconButton>
               )}
 
               <IconButton href="/Userprofile">
-                <FavoriteBorderOutlinedIcon />
+                <PersonOutlineOutlinedIcon />
               </IconButton>
               <div className="cartIcon" onClick={() => setOpen(!open)}>
                 <ShoppingCartOutlinedIcon />
