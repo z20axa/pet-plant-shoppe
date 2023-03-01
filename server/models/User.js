@@ -26,6 +26,12 @@ const userSchema = new Schema({
       ref: 'Plant',
     },
   ],
+ orders: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Order',
+    },
+  ],
 });
 // created pre-hook functions I could export for the purpose of testing
 const hashPassword = async function (next) {
