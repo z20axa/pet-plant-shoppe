@@ -23,7 +23,8 @@ module.exports = {
       if (data) {
         req.user = data;
       }
-      console.log("REQ", req);
+      //console.log("REQ", req);
+      console.log(req.user)
       return req;
     } catch (err) {
       console.log(err);

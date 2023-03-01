@@ -41,7 +41,7 @@ if(!Auth.loggedIn()){
       <h2 className="card-header">Hello {profile.username}!
       </h2>
 <p> List of your Favorite Plants     </p>
-     {profile.plant.map(plant=>
+     {profile.plant && profile.plant.map(plant=>
         (plant.name)
         
         )}

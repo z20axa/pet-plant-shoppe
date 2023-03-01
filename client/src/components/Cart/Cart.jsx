@@ -8,6 +8,7 @@ import { removeItem, resetCart } from "../../redux/cartReducer";
 import { useDispatch } from "react-redux";
 import { makeRequest } from "../../makeRequest";
 import { loadStripe } from "@stripe/stripe-js";
+import auth from "../../utils/auth";
 
 const Cart = () => {
   const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
@@ -15,6 +16,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
   //
+  console.log("AM I LOGGED IN???", auth.loggedIn())
 
   useEffect(() => {
     if (data) {
@@ -63,6 +65,7 @@ const Cart = () => {
   };
   return (
     <div className="cart">
+
       <h1>Plants in your cart</h1>
       {products?.map((item) => (
         <div className="item" key={item.plant._id}>
@@ -83,7 +86,8 @@ const Cart = () => {
         <span>TOTAL</span>
         <span>${totalPrice()}</span>
       </div>
-      <button onClick={handlePayment}>PROCEED TO CHECKOUT</button>
+
+      {auth.loggedIn() ? <button onClick={handlePayment}>PROCEED TO CHECKOUT</button> : <h1>PLEASE LOGIN TO CHECKOUT</h1>}
       <span className="reset" onClick={() => dispatch(resetCart())}>
         Reset Cart
       </span>
