@@ -24,9 +24,10 @@ module.exports = {
         contextValue.user = data;
         contextValue.headers = req.http.headers;
       }
+
       return data;
       console.log("REQUSER>>>", req.user);
-      return req;
+
     } catch (err) {
       console.log(err);
       console.log("Invalid token");

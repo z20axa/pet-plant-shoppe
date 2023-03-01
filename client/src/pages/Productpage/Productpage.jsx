@@ -41,13 +41,13 @@ const Productpage = () => {
         <h1>Loading...</h1>
       ) : (
 
-        <div classname="container">
+        <div className="container">
           <div >
             <img src={plantInfo.imageUrl} alt={plantInfo.name} className="cardImage" />
           </div>
           <div className="plantCard">
             <h1>{plantInfo.name}</h1>
-            <div classname="desc">
+            <div className="desc">
               <h2>{plantInfo.description}</h2>
               <h2>Care level : {plantInfo.careLevel}</h2>
               <h2>Light Required : {plantInfo.light}</h2>
@@ -56,7 +56,7 @@ const Productpage = () => {
               <h3>price : ${plantInfo.price}</h3></div>
           </div>
 
-          <div classname="container">
+          <div className="container">
             <button className="plantc"
               onClick={() => setQuantity((prev) => (prev === 1 ? 1 : prev - 1))}
             >

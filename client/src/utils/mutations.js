@@ -25,6 +25,25 @@ mutation addUser($username: String!, $email: String!, $password: String!) {
 }
 `;
 
+export const ADD_ORDER = gql`
+  mutation addOrder($plants: [ID]!) {
+    addOrder(plants: $plants) {
+      purchaseDate
+      products {
+        _id
+        name
+        description
+        price
+        quantity
+        category {
+          name
+        }
+      }
+    }
+  }
+`;
+
+
 
 
 export const ADD_COMMENT = gql`

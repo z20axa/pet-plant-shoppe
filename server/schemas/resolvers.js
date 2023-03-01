@@ -103,7 +103,9 @@ const resolvers = {
 
     me: async (parent, args, context) => {
       //check to see if user is logged in
+
       console.log("CONTEXT>>>", context);
+
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("plant");
       }
@@ -190,6 +192,7 @@ const resolvers = {
     },
 
     addFavorite: async (parent, { plantId }, context) => {
+     
       if (context.user) {
         const plant = await Plant.findOne({
           _id: plantId,
@@ -200,6 +203,7 @@ const resolvers = {
             { $addToSet: { plant: plant._id } },
             { new: true }
           ).populate("plant");
+          console.log("USER>>>", user)
           return user;
         }
 
@@ -261,13 +265,13 @@ const resolvers = {
     },
 
     // add order to buy plants
-    addOrder: async (parent, { products }, context) => {
+    addOrder: async (parent, { plants }, context) => {
       console.log(context);
       if (context.user) {
-        const order = new Order({ products });
+        const order =  Order.create({ products: plants });
 
         await User.findByIdAndUpdate(context.user._id, {
-          $push: { orders: order },
+          $push: { orders: order._id },
         });
 
         return order;
