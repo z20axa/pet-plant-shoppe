@@ -1,50 +1,42 @@
-import React from 'react';
+import React from "react";
 
-import { Navigate, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { Navigate, useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 import "./Userprofile.scss";
 
-import { ME} from '../../utils/queries';
+import { ME } from "../../utils/queries";
 
-import Auth from '../../utils/auth';
+import Auth from "../../utils/auth";
 
 const Profile = () => {
   const { profileId } = useParams();
 
   // If there is no `profileId` in the URL as a parameter, execute the `BY_PLANTNAME` query instead for the logged in user's information
-  const { loading, data } = useQuery(ME)
-//console.log(data)
+  const { loading, data } = useQuery(ME);
+  //console.log(data)
   // Check if data is returning from the `BY_PLANTNAME` query, then the `ALL_PLANTS` query
   const profile = data?.me || data?.user || {};
-  console.log(data)
+  console.log(data);
   // Use React Router's `<Redirect />` component to redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
-   return <Navigate to="/me" />;
- }
-if(!Auth.loggedIn()){
-  return <h1>You must be logged in</h1>
-}
+    return <Navigate to="/me" />;
+  }
+  if (!Auth.loggedIn()) {
+    return <h1>You must be logged in</h1>;
+  }
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (loading) {
-    return (
-      <h4>
-     Loading....
-      </h4>
-    );
+    return <h4>Loading....</h4>;
   }
-  console.log(profile)
+  console.log(profile);
   return (
     <div className="box">
-      <h2 className="card-header">Hello {profile.username}!
-      </h2>
-<p> List of your Favorite Plants     </p>
-     {profile.plant.map(plant=>
-        (plant.name)
-        
-        )}
+      <h2 className="card-header">Hello {profile.username}!</h2>
+      <p> List of your Favorite Plants </p>
+      {profile.plant && profile.plant.map((plant) => plant.name)}
     </div>
   );
 };

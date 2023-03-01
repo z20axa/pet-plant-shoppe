@@ -1,4 +1,6 @@
 import { createSlice, current } from "@reduxjs/toolkit";
+import Auth from "../utils/auth";
+
 
 const initialState = {
   products: [],
@@ -9,6 +11,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
+      
       const item = state.products.find(
         (item) => item.plant._id === action.payload.plant._id
       );

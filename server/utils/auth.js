@@ -21,9 +21,11 @@ module.exports = {
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       if (data) {
-        req.user = data;
+        contextValue.user = data;
+        contextValue.headers = req.http.headers;
       }
-      console.log("REQ", req);
+      return data;
+      console.log("REQUSER>>>", req.user);
       return req;
     } catch (err) {
       console.log(err);
