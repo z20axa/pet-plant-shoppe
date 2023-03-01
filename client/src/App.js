@@ -12,7 +12,7 @@ import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
-import Product from "./pages/Product/product";
+import Productpage from "./pages/Productpage/Productpage";
 import Signin from "./pages/Signin/Signin";
 import Login from "./pages/Login/Login";
 import Ourpro from "./pages/Ourpro/Ourpro";
@@ -73,8 +73,8 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/product/:id",
-        element: <Product/>,
+        path: "/Productpage/:id",
+        element: <Productpage/>,
       },
       {
         path: "/Threep",
