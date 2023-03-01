@@ -3,6 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LoginIcon from '@mui/icons-material/Login';
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import Cart from "../Cart/Cart";
@@ -66,8 +67,8 @@ const Navbar = () => {
                 <SearchIcon />
               </IconButton>
               {Auth.loggedIn() ? (
-                <p className="center" onClick={() => Auth.logout()}>LOGOUT</p>
-              ) : (
+                <p className="logout" onClick={() => Auth.logout()}><DirectionsRunIcon/>LOGOUT</p>
+              ) :(
                 <IconButton href="/Signin">
                   < LoginIcon />
                 </IconButton>
