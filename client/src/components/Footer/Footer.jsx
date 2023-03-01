@@ -7,9 +7,10 @@ const Footer = () => {
     <div className="footer">
       <div className="top">
         <div className="item">
-          <h1><Link style={{ textDecoration: 'none', color: 'white' }} to="/">
+          <h2><Link style={{ textDecoration: 'none', color: 'white' }} to="/">
             Home
-          </Link></h1>
+          </Link>
+          </h2>
           <span><Link style={{ textDecoration: 'none' }} to="/Products">
           SHOP
           </Link></span>
@@ -24,7 +25,7 @@ const Footer = () => {
           </Link></span>
         </div>
         <div className="item">
-          <h1>Social Media</h1>
+          <h2>Social Media</h2>
           <span><Link style={{ textDecoration: 'none'}} to="https://www.facebook.com/">
           Facebook
           </Link></span>
@@ -42,14 +43,14 @@ const Footer = () => {
           </Link></span>
         </div>
         <div className="item">
-          <h1>Open Hours</h1>
+          <h2>Open Hours</h2>
           <span>
             Monday - Friday: 8:00 AM- 5:00 PM<br></br>
             Saturday - Sunday: Closed
           </span>
         </div>
         <div className="item">
-          <h1>Contact us</h1>
+          <h2>Contact us</h2>
           <span>
             Phone: 123-456-7890<br></br>
             Email: hello@reallygreatsite.com<br></br>

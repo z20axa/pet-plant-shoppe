@@ -3,7 +3,6 @@ import { useState } from "react";
 import "./Productpage.scss";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-//import BalanceIcon from "@mui/icons-material/Balance";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
@@ -36,10 +35,10 @@ function addingToFave(){
         <div>
           <div className="plantCard">
             <h1>{plantInfo.name}</h1>
-            <h1>{plantInfo.description}</h1>
-            <h1>{plantInfo.careLevel}</h1>
-            <h1>{plantInfo.light}</h1>
-            <h1>{plantInfo.price}</h1>
+           <div classname="desc"> <h1>{plantInfo.description}</h1>
+            <h2>{plantInfo.careLevel}</h2>
+            <h2>{plantInfo.light}</h2>
+            <h2>{plantInfo.price}</h2></div>
             <div>
               <img src={plantInfo.imageUrl} alt={plantInfo.name} className="cardImage" />
             </div>
