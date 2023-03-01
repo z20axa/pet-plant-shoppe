@@ -3,20 +3,21 @@ import { useState } from "react";
 import "./Productpage.scss";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
 import { useQuery, useMutation } from "@apollo/client";
 import { FIND_PLANT } from "../../utils/queries";
 import { ADD_FAV } from "../../utils/mutations";
 
-import Auth from "../../utils/auth";
-console.log(Auth.loggedIn());
+import auth from "../../utils/auth";
+console.log(auth.loggedIn());
 
 const Productpage = () => {
   const [buttonText, setButtonText] = useState("Add To Favorite");
   const id = useParams().id;
 
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const { data, loading } = useQuery(FIND_PLANT, {
     variables: { plantId: id },
@@ -26,17 +27,33 @@ const Productpage = () => {
   const plantInfo = data?.plant || {};
 
   const dispatch = useDispatch();
-  function addingToFave() {
-    addFav({ variables: { plantId: plantInfo._id } })
-    console.log("adding")
-  }
 
-  function addingToTheCart(){
+  async function addingToFave() {
+    console.log("adding")
+    console.log(auth.loggedIn())
+    if (auth.loggedIn() ){
+      setButtonText("Adding")
+      await addFav({ variables: { plantId: plantInfo._id }} )
+      setButtonText("Added")
+    }
+    
+    else {
+     navigate("/Signin");
+    }
     
   }
+
+  // function addingToTheCart(){
+  //   if(!Auth.loggedIn) 
+
+  //   else
+
+  //   dispatch(addToCart({ plant: plantInfo, quantity }))
+  // }
   console.log(plantInfo);
   return (
     <div>
+      
       {loading ? (
         <h1>Loading...</h1>
       ) : (
@@ -65,29 +82,31 @@ const Productpage = () => {
             {quantity}
             <button className="plantc" onClick={() => setQuantity((prev) => prev + 1)}>+</button>
           </div>
-         {Auth.loggedIn() ? <button 
+         <button 
             className="add"
              onClick={() => dispatch(addToCart({ plant: plantInfo, quantity }))}
           > 
             <AddShoppingCartIcon />
             ADD TO CART
-          </button> : <h2>Please log in to add to cart</h2>}
+          </button> 
           
           
 
           
           <div className="linked">
-            <div className="itemto" onClick={() => addingToFave()}>
+            <div className="itemto">
 
               <FavoriteBorderIcon />
               <button
                 type="itemto"
                 onClick={() => {
-                  setButtonText("Added");
-                  setTimeout(() => {
-                    setButtonText("Add To Favorite");
-                  }, 1000);
+                  addingToFave()
+                  // setButtonText("Added");
+                  // setTimeout(() => {
+                  //   setButtonText("Add To Favorite");
+                  // }, 1000);
                 }}>
+                  {error}
                 {buttonText}
               </button>
             </div>

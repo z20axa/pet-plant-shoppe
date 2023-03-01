@@ -60,10 +60,10 @@ const Login = () => {
         <div className="login">
             <div className="card">
                 <div className="left">
-                    <h1>Hey! My friend</h1>
+                    {/* <h1>Hey! My friend</h1> */}
                 </div>
                 <div className="right">
-                    <h1>Existing Users</h1>
+                    {/* <h1>Grow with us</h1> */}
                     <form onSubmit={handleFormSubmit}>
                         <input type="text" name="email" onChange={handleInputChange} value={userFormData.email} placeholder="Email" />
                         <input type="password" name="password" onChange={handleInputChange} value={userFormData.password} placeholder="Password" />
