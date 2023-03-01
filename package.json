@@ -20,6 +20,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.10",
+    "caniuse-lite": "^1.0.30001458",
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
     "jwt-decode": "^3.1.2",
