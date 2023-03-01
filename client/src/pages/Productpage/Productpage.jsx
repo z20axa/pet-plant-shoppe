@@ -10,6 +10,8 @@ import { useQuery, useMutation } from "@apollo/client";
 import { FIND_PLANT } from "../../utils/queries";
 import { ADD_FAV } from "../../utils/mutations";
 
+import Auth from "../../utils/auth";
+console.log(Auth.loggedIn());
 
 const Productpage = () => {
   const [buttonText, setButtonText] = useState("Add To Favorite");
@@ -27,6 +29,10 @@ const Productpage = () => {
   function addingToFave() {
     addFav({ variables: { plantId: plantInfo._id } })
     console.log("adding")
+  }
+
+  function addingToTheCart(){
+    
   }
   console.log(plantInfo);
   return (
@@ -59,13 +65,15 @@ const Productpage = () => {
             {quantity}
             <button className="plantc" onClick={() => setQuantity((prev) => prev + 1)}>+</button>
           </div>
-          <button
+         {Auth.loggedIn() ? <button 
             className="add"
-            onClick={() => dispatch(addToCart({ plant: plantInfo, quantity }))}
-          >
+             onClick={() => dispatch(addToCart({ plant: plantInfo, quantity }))}
+          > 
             <AddShoppingCartIcon />
             ADD TO CART
-          </button>
+          </button> : <h2>Please log in to add to cart</h2>}
+          
+          
 
           
           <div className="linked">
