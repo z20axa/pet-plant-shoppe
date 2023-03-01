@@ -11,7 +11,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { FIND_PLANT } from "../../utils/queries";
 import { ADD_FAV } from "../../utils/mutations";
 
-const Product = () => {
+const Productpage = () => {
   const id = useParams().id;
 
   const [quantity, setQuantity] = useState(1);
@@ -71,4 +71,4 @@ function addingToFave(){
     </div>
   );
 };
-export default Product;
+export default Productpage;

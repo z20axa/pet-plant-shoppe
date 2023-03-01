@@ -14,7 +14,7 @@ export default function CategoryList({plants}){
               {plants.map((plant, index) => (
                 <div key ={index}>
                  <Link
-                 to={`/Product/${plant._id}`}>
+                 to={`/Productpage/${plant._id}`}>
                   <div><img src={plant.imageUrl} alt={plant.name}/></div>
                   </Link>
 
