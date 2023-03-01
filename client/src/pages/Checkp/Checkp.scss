@@ -20,8 +20,6 @@
         border: none;
         padding: 4px;
     }
-   
-
 
 }
 
@@ -75,7 +73,8 @@ h2{
      
     }
     li:hover {
-        background-color:#002ead;
-        transition: 0.7s;
+        background-color:rgb(212, 245, 102);
+        transition: 0.1s;
+        font-weight: 600;
     }
 }
