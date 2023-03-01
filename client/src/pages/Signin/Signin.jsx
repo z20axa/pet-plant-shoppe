@@ -92,7 +92,7 @@ const Signin = () => {
                         </Link></button> */}
                     </form>
                     <span>If you have an account, please log in.</span>
-                        <button><Link style={{ textDecoration: 'none', color: 'white' }} to="/login">
+                        <button className="btn btn-primary btn-block py-3" type=""><Link style={{ textDecoration: 'none', color: 'white' }} to="/login">
                             Login
                         </Link></button>
                 </div>

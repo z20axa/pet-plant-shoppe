@@ -2,9 +2,7 @@ import React from 'react';
 
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-
-// import SkillsList from '../components/SkillsList';
-// import SkillForm from '../components/SkillForm';
+import "./Userprofile.scss";
 
 import { ME} from '../../utils/queries';
 
@@ -39,15 +37,14 @@ if(!Auth.loggedIn()){
   }
   console.log(profile)
   return (
-    <div>
+    <div className="box">
       <h2 className="card-header">Hello {profile.username}!
       </h2>
-<p> List of your Favorite Plants</p>
-      {profile.plant.map(plant=>
+<p> List of your Favorite Plants     </p>
+     {profile.plant.map(plant=>
         (plant.name)
         
         )}
-
     </div>
   );
 };
