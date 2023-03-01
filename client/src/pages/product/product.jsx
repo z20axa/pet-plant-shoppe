@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import "./Product.scss";
+import "./product.scss";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 //import BalanceIcon from "@mui/icons-material/Balance";
