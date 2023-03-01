@@ -1,17 +1,16 @@
-require('dotenv').config();
+require("dotenv").config();
 
+const path = require("path");
+const express = require("express");
+const db = require("./config/connection");
+require("./seeders");
 
-const path = require('path');
-const express = require('express');
-const db = require('./config/connection'); 
+const { ApolloServer } = require("@apollo/server");
+const { authMiddleware } = require("./utils/auth");
 
-
-const { ApolloServer } = require('@apollo/server');
-const { authMiddleware } = require('./utils/auth');
-
-const { expressMiddleware } = require('@apollo/server/express4');
-const { typeDefs, resolvers } = require('./schemas');
-const cors = require('cors');
+const { expressMiddleware } = require("@apollo/server/express4");
+const { typeDefs, resolvers } = require("./schemas");
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -19,13 +18,14 @@ const PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname, '../client/build')));
-  app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "../client/build")));
 
+//   };
+
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
 
 const server = new ApolloServer({
   typeDefs,
@@ -39,21 +39,18 @@ const server = new ApolloServer({
       },
     },
   ],
-})
+});
 
-const startServer = async() => {
+const startServer = async () => {
   await server.start();
-  app.use('/graphql', cors(), expressMiddleware(server));
+  app.use("/graphql", cors(), expressMiddleware(server));
 
-
-  db.once('open', () => {
+  db.once("open", () => {
     app.listen(PORT, () => {
       console.log(`API server running on http://localhost:${PORT}`);
       console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
   });
-}
-
+};
 
 startServer();
-

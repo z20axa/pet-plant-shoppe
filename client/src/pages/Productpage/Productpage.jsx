@@ -43,7 +43,10 @@ const Productpage = () => {
             <h1>{plantInfo.name}</h1>
             <div classname="desc">
               <h2>{plantInfo.description}</h2>
-              <h2>care level : {plantInfo.careLevel}</h2>
+              <h2>Care level : {plantInfo.careLevel}</h2>
+              <h2>Light Required : {plantInfo.light}</h2>
+              <h2>Safe for : {plantInfo.animalSafe}</h2>
+
               <h3>price : ${plantInfo.price}</h3></div>
           </div>
 
@@ -63,6 +66,8 @@ const Productpage = () => {
             <AddShoppingCartIcon />
             ADD TO CART
           </button>
+
+          
           <div className="linked">
             <div className="itemto" onClick={() => addingToFave()}>
 
