@@ -193,7 +193,7 @@ const resolvers = {
 
     addFavorite: async (parent, { plantId }, context) => {
      
-      if (context.user) {
+      if (context.user && context.user._id) {
         const plant = await Plant.findOne({
           _id: plantId,
         });
