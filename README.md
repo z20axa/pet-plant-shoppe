@@ -30,11 +30,17 @@ pet. In addition, we partner with SPCA so we can donate 50% of the sales when yo
 
 
 The following image shows the finished product
-![The screenshot shows a  picture of the homepage.]()
+![The screenshot shows a  picture of the homepage.](/client/public/img/homepage.jpg)
 
-![The screenshot shows a  picture of the write notes page.]()
+![The screenshot shows a  picture of the search by name plant function.](/client/public/img/seach_name.jpg)
 
-![The screenshot shows a  picture of the see notes page.]()
+![The screenshot shows a  picture of the search by animal function.](/client/public/img/search_type.jpg)
+
+![The screenshot shows a  picture of the gallery page.](/client/public/img/gallery.jpg)
+
+![The screenshot shows a  page of single plant with a shopping cart.](/client/public/img/plantCart.jpeg)
+
+![The screenshot shows a  picture of list of favorite for the User.](/client/public/img/userfav.jpeg)
 
 ## Finished-product
 
@@ -52,7 +58,7 @@ Angelica Ibarra (Back-End)
 Alejandro Asencio (Back-End)
 
 
-
+Images are credits of https://www.livelyroot.com/
 ## License
 
 
