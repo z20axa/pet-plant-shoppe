@@ -14,14 +14,12 @@ pet. In addition, we partner with SPCA so we can donate 50% of the sales when yo
 
 ## Table of Contents 
 
-- [Usage](#usage)
+
 - [Mock-Up](#mock-up)
 - [Finished Product](#finished-product)
 - [Credits](#credits)
 - [License](#license)
 
-
-## Usage
 
 
 
@@ -58,7 +56,9 @@ Angelica Ibarra (Back-End)
 Alejandro Asencio (Back-End)
 
 
-Images are credits of https://www.livelyroot.com/
+Images are credits of https://www.livelyroot.com/, https://www.lenzationstudio.com, 
+
+logo is created by Anouk Johnson
 ## License
 
 
