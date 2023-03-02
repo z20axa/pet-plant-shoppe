@@ -43,7 +43,7 @@ const server = new ApolloServer({
     },
   ],
 });
-
+///starts server and grapql
 const startServer = async () => {
   await server.start();
   app.use("/graphql", cors(), expressMiddleware(server));

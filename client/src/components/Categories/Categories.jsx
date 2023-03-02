@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+
 
 import CategoryQ from "./CategoryQ";
-
+/// dipslaying results of query
 const Categories = () => {
-  // const {plantId} = useParams();
-
-
 
   return (
     <CategoryQ/>

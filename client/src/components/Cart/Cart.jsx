@@ -6,27 +6,25 @@ import { QUERY_CHECKOUT } from "../../utils/queries";
 import { useSelector } from "react-redux";
 import { removeItem, resetCart } from "../../redux/cartReducer";
 import { useDispatch } from "react-redux";
-// import { makeRequest } from "../../makeRequest";
 import { loadStripe } from "@stripe/stripe-js";
 import auth from "../../utils/auth";
-
+/// all commeted out sectiosn are ofr stripe setup - future development
 const Cart = () => {
-  const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+  // const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
   const products = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
-  //
-  console.log("AM I LOGGED IN???", auth.loggedIn())
+  
+// redirect to checkout  - FUTURE development
+  // useEffect(() => {
+  //   if (data) {
+  //     stripePromise.then((res) => {
+  //       res.redirectToCheckout({ sessionId: data.checkout.session });
+  //     });
+  //   }
+  // }, [data]);
 
-  useEffect(() => {
-    if (data) {
-      stripePromise.then((res) => {
-        res.redirectToCheckout({ sessionId: data.checkout.session });
-      });
-    }
-  }, [data]);
-
-  //
+  // calculate total price for items in the cart
 
   const totalPrice = () => {
     let total = 0;
@@ -36,21 +34,9 @@ const Cart = () => {
     return total.toFixed(2);
   };
 
-  // const stripePromise = loadStripe(
-  //   "pk_test_eOTMlr8usx1ctymXqrik0ls700lQCsX2UB"
-  // );
+  
   const handlePayment = async () => {
-    // try {
-    //   const stripe = await stripePromise;
-    //   const res = await makeRequest.post("/orders", {
-    //     products,
-    //   });
-    //   await stripe.redirectToCheckout({
-    //     sessionId: res.data.stripeSession.id,
-    //   });
-    // } catch (err) {
-    //   console.log(err);
-    // }
+  
     const productIds = [];
     products.forEach((item) => {
       console.log(item);
@@ -63,6 +49,8 @@ const Cart = () => {
       variables: { plants: productIds },
     });
   };
+
+  //// dipslay list of plants in the cart
   return (
     <div className="cart">
 
@@ -78,7 +66,7 @@ const Cart = () => {
           </div>
           <DeleteOutlinedIcon
             className="delete"
-            onClick={() => dispatch(removeItem(item.id))}
+            onClick={() => dispatch(removeItem(item.plant._id))}
           />
         </div>
       ))}

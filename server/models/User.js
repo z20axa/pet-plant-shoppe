@@ -26,6 +26,7 @@ const userSchema = new Schema({
       ref: 'Plant',
     },
   ],
+  // orders: [Order.schema]
  orders: [
     {
       type: Schema.Types.ObjectId,
@@ -33,7 +34,7 @@ const userSchema = new Schema({
     },
   ],
 });
-// created pre-hook functions I could export for the purpose of testing
+// created pre-hook functions  -  export for the purpose of testing
 const hashPassword = async function (next) {
   if (this.isNew || this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, saltRounds);
@@ -42,7 +43,7 @@ const hashPassword = async function (next) {
   next();
 };
 
-// created pre-hook functions I could export for the purpose of testing
+// created pre-hook functions  - export for the purpose of testing
 const hashAllPasswords = async function (next, docs) {
   if(Array.isArray(docs) && docs.length) {
     const hashedUsers = docs.map( async (user) => {

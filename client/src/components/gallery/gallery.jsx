@@ -1,7 +1,7 @@
 import React from "react";
 import "./gallery.scss";
 import { Link } from "react-router-dom";
-
+//// set up for future newspaper, news etc
 const gallery = () => {
   return (
     <div className="cate">

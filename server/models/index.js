@@ -1,6 +1,6 @@
 
 
-//This will be the code after deleting Thoughts.js and adding Plants.js
+//code to adding Plants.js in Stripe setupe
 const { User } = require('./User');
 const {Plant} = require('./Plants');
 const Order = require('./Order');

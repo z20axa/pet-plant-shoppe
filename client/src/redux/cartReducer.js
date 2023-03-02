@@ -1,5 +1,5 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-import Auth from "../utils/auth";
+import { createSlice} from "@reduxjs/toolkit";
+
 
 
 const initialState = {
@@ -23,8 +23,9 @@ export const cartSlice = createSlice({
       console.log("STATE ONCE DONE", state);
     },
     removeItem: (state, action) => {
+     
       state.products = state.products.filter(
-        (item) => item.id !== action.payload
+        (item) => item.plant._id !== action.payload
       );
     },
     resetCart: (state) => {
