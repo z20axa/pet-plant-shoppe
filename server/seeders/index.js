@@ -1,15 +1,17 @@
-require('dotenv').config();
+require("dotenv").config();
+const { Plant } = require("../models");
 // console.log(process.env.NODE_ENV);
-const db = require('../config/connection');
+const db = require("../config/connection");
 
-const { seedDatabase } = require("./plantSeed");
+const plantSeed = require("./plantsSeeds.json");
 
 const run = async () => {
-  await seedDatabase();
+  await Plant.deleteMany();
+  await Plant.insertMany(plantSeed);
+  console.log("ALL DONE");
+  //process.exit();
+};
 
-  process.exit();
-}
-
-db.once('open', () => {
+db.once("open", () => {
   run();
 });

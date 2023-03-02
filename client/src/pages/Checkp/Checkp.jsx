@@ -38,12 +38,12 @@ const Checkp = () => {
         <button onClick={() => window.location.reload(false)}>Refresh</button>
         <h4>Search by pet type</h4>
         <ul className="suggestions-list" role="navigation">
-          <div classname="type"><li onClick={()=> setFilter("cat")}>cat friendly</li></div>
-          <div classname="type"><li onClick={()=> setFilter("dog")}>dog friendly</li></div>
+          <div className="type"><li onClick={()=> setFilter("cat")}>cat friendly</li></div>
+          <div className="type"><li onClick={()=> setFilter("dog")}>dog friendly</li></div>
     </ul>
       </div>
       <div className="result">
-      {value && plantInfo.filter(plant => {
+      {(value || filter) && plantInfo.filter(plant => {
         const myFilter = new RegExp(filter)
         return myFilter.test(plant.animalSafe)
       }).map(plant => (

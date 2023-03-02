@@ -1,8 +1,8 @@
 const { User, Plant, Order } = require("../models");
 const { signToken } = require("../utils/auth");
-require('dotenv').config();
-//Stripe key 
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+require("dotenv").config();
+//Stripe key
+const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 const userSeeds = require("../seeders/userSeeds.json");
 const plantSeeds = require("../seeders/plantsSeeds.json");
 
@@ -22,7 +22,7 @@ const resolvers = {
 
     //???? - sorts by time of creation - could use it in comment section
     plants: async (parent, { username }) => {
-      return Plant.find()
+      return Plant.find();
       const params = username ? { username } : {};
       return Plant.find(params).sort({ createdAt: -1 });
     },
@@ -37,7 +37,6 @@ const resolvers = {
       return {
         key: process.env.bestripeKey,
       };
-      
     },
 
     // order query for plants for purchase
@@ -56,13 +55,14 @@ const resolvers = {
 
     // checkout query for plants for purchase
     checkout: async (parent, args, context) => {
+      const order = new Order({ products: args.plants });
+      console.log(context);
       const url = new URL(context.headers.referer).origin;
-      const order = new Order({ products: args.products });
+      console.log(url);
       const line_items = [];
       const stripe = getStripeKey();
-
-      const { products } = await order.populate('products');
-
+      const { products } = await order.populate("products");
+      console.log(products);
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({
           name: products[i].name,
@@ -73,21 +73,21 @@ const resolvers = {
         const price = await stripe.prices.create({
           product: product.id,
           unit_amount: products[i].price * 100,
-          currency: 'usd',
+          currency: "usd",
         });
 
         line_items.push({
           price: price.id,
-          quantity: 1
+          quantity: 1,
         });
       }
 
       const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
+        payment_method_types: ["card"],
         line_items,
-        mode: 'payment',
+        mode: "payment",
         success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`
+        cancel_url: `${url}/`,
       });
 
       return { session: session.id };
@@ -103,6 +103,9 @@ const resolvers = {
 
     me: async (parent, args, context) => {
       //check to see if user is logged in
+
+      console.log("CONTEXT>>>", context);
+
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("plant");
       }
@@ -138,18 +141,18 @@ const resolvers = {
         await User.deleteMany({});
 
         await User.create(userSeeds);
-
-        for (let i = 0; i < plantSeeds.length; i++) {
-          const { _id, plantAuthor } = await Plant.create(plantSeeds[i]);
-          const user = await User.findOneAndUpdate(
-            { username: plantAuthor },
-            {
-              $addToSet: {
-                plant: _id,
-              },
-            }
-          );
-        }
+        await Plant.insertMany(plantSeeds);
+        // for (let i = 0; i < plantSeeds.length; i++) {
+        //   const { _id, plantAuthor } = await Plant.create(plantSeeds[i]);
+        //   const user = await User.findOneAndUpdate(
+        //     { username: plantAuthor },
+        //     {
+        //       $addToSet: {
+        //         plant: _id,
+        //       },
+        //     }
+        //   );
+        // }
 
         return "all done!";
       } catch (err) {
@@ -164,12 +167,9 @@ const resolvers = {
       return { token, user };
     },
 
-    removeUser: async (parent, {_id}, context)=> {
+    removeUser: async (parent, { _id }, context) => {
       const user = await User.findOne({ _id });
-      return User.findOneAndDelete(
-        { _id: context.user._id },
-        { new: true }
-      );
+      return User.findOneAndDelete({ _id: context.user._id }, { new: true });
     },
 
     // login in existing user
@@ -192,7 +192,8 @@ const resolvers = {
     },
 
     addFavorite: async (parent, { plantId }, context) => {
-      if (context.user) {
+     
+      if (context.user && context.user._id) {
         const plant = await Plant.findOne({
           _id: plantId,
         });
@@ -202,6 +203,7 @@ const resolvers = {
             { $addToSet: { plant: plant._id } },
             { new: true }
           ).populate("plant");
+          console.log("USER>>>", user)
           return user;
         }
 
@@ -263,20 +265,21 @@ const resolvers = {
     },
 
     // add order to buy plants
-    addOrder: async (parent, { products }, context) => {
+    addOrder: async (parent, { plants }, context) => {
       console.log(context);
       if (context.user) {
-        const order = new Order({ products });
+        const order =  Order.create({ products: plants });
 
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+        await User.findByIdAndUpdate(context.user._id, {
+          $push: { orders: order._id },
+        });
 
         return order;
       }
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
-  }
+  },
 };
-
 
 module.exports = resolvers;
