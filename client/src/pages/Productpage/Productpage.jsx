@@ -64,12 +64,11 @@ const Productpage = () => {
           </div>
           <div className="plantCard">
             <h1>{plantInfo.name}</h1>
-            <div className="desc">
-              <h2>{plantInfo.description}</h2>
-              <h2>Care level : {plantInfo.careLevel}</h2>
-              <h2>Light Required : {plantInfo.light}</h2>
-              <h2>Safe for : {plantInfo.animalSafe}</h2>
-
+            <div className="desc"><br></br>
+              <h2>{plantInfo.description}</h2><br></br><br></br>
+              <h2>Care level :<b> {plantInfo.careLevel}</b></h2>
+              <h2>Safe for : <b>{plantInfo.animalSafe}</b></h2>
+              <h2>Light Required : <b>{plantInfo.light}</b></h2>
               <h3>price : ${plantInfo.price}</h3></div>
           </div>
 
