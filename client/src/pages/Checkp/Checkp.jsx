@@ -32,7 +32,7 @@ const Checkp = () => {
     <div className="App">
     <div className="search-container">
       <div className="search-inner">
-      <h2>search plant's name to see if this plant Safe for Cats and Dogs</h2>
+      <h2>Search a plants name to see if the plant is Safe for Cats and Dogs</h2>
         <input type="text" value={value} onChange={onChange} />
         <button onClick={() => onSearch(value)}> Search </button>
         <button onClick={() => window.location.reload(false)}>Refresh</button>
