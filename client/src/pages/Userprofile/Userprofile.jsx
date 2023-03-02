@@ -43,9 +43,10 @@ const Profile = () => {
 
       <h2 className="card-header">Hello {profile.username}!</h2>
       <p> Check the List of your Favorite Plants </p>
-      <h5>
-      {profile.plant && profile.plant.map((plant) => plant.name)}
-      </h5>
+      {profile.plant && profile.plant.map((plant,index) => (
+      <h5 key={index}>{plant.name}</h5>
+      )
+      )}
     </div>
   );
 };
