@@ -45,7 +45,6 @@ const startServer = async() => {
   await server.start();
   app.use('/graphql', cors(), expressMiddleware(server));
 
-
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on http://localhost:${PORT}`);
