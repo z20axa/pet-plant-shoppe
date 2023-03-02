@@ -8,7 +8,7 @@ const Slider = () => {
 
   const data = [
     "img/catplant2.jpeg",
-    "img/5.PNG",
+    "img/5.png",
     "img/plants-4.jpg",
   ];
 
