@@ -7,6 +7,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import { IconButton } from '@mui/material';
 
+/// icons with links to social media in the bottom band
 const Contact = () => {
   return (
     <div className="contact">

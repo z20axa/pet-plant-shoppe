@@ -6,6 +6,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="top">
+        
         <div className="item">
           <h2><Link style={{ textDecoration: 'none', color: 'white' }} to="/">
             Home

@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-//Check if light and  price are also a Strings
+//Plants model
 const plantSchema = new Schema({
   name: {
     type: String,

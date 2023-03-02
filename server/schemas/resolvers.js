@@ -20,12 +20,12 @@ const resolvers = {
       return User.findOne({ username }).populate("plant");
     },
 
-    //???? - sorts by time of creation - could use it in comment section
-    plants: async (parent, { username }) => {
-      return Plant.find();
-      const params = username ? { username } : {};
-      return Plant.find(params).sort({ createdAt: -1 });
-    },
+    //sorts by time of creation - future use in orders and comment section
+    // plants: async (parent, { username }) => {
+    //   return Plant.find();
+    //   const params = username ? { username } : {};
+    //   return Plant.find(params).sort({ createdAt: -1 });
+    // },
 
     //finding one plant by plant id
     plant: async (parent, { plantId }) => {
@@ -67,7 +67,7 @@ const resolvers = {
         const product = await stripe.products.create({
           name: products[i].name,
           description: products[i].description,
-          // images: [`${url}/images/${products[i].image}`]
+        
         });
 
         const price = await stripe.prices.create({
@@ -94,7 +94,7 @@ const resolvers = {
     },
 
     // query to separate only plants sold in store in DB
-    //Query is returning nothing
+    
     inStore: async (parent, { name }) => {
       return Plant.find({ inStore: true });
     },
@@ -142,17 +142,7 @@ const resolvers = {
 
         await User.create(userSeeds);
         await Plant.insertMany(plantSeeds);
-        // for (let i = 0; i < plantSeeds.length; i++) {
-        //   const { _id, plantAuthor } = await Plant.create(plantSeeds[i]);
-        //   const user = await User.findOneAndUpdate(
-        //     { username: plantAuthor },
-        //     {
-        //       $addToSet: {
-        //         plant: _id,
-        //       },
-        //     }
-        //   );
-        // }
+       
 
         return "all done!";
       } catch (err) {
@@ -243,7 +233,7 @@ const resolvers = {
       }
       throw new Error("You need to be logged in -test3!");
     },
-    //Checking for the context to add the user
+    //Checking for the context to add the user comment - future development
     /**When we create the token, it identifies the user which creates a context and it is created by the authentication Middleware inside auth.js; once it verifies the user, it will put it as part of the request for the user   */
     removeComment: async (parent, { plantId, commentId }, context) => {
       if (context.user) {
@@ -264,7 +254,7 @@ const resolvers = {
       throw new Error("You need to be logged in -test5!");
     },
 
-    // add order to buy plants
+    // add order to buy plants - future development
     addOrder: async (parent, { plants }, context) => {
       console.log(context);
       if (context.user) {

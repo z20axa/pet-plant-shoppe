@@ -23,6 +23,7 @@
     "caniuse-lite": "^1.0.30001458",
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
+    "graphql": "^16.6.0",
     "jwt-decode": "^3.1.2",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",

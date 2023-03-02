@@ -3,7 +3,7 @@ import Contact from '../../components/Contact/Contact';
 import Slick from "../../components/Slick/Slick";
 import Gallery from "../../components/gallery/gallery";
 import "./Threep.scss";
-
+/// three paws club - future development to post blog, newspaper, customer comments etc
 
 const Threep = () => {
     return (

@@ -4,10 +4,10 @@ import Contact from '../../components/Contact/Contact';
 import "./Checkp.scss";
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { BY_ANIMAL, BY_PLANTNAME } from '../../utils/queries';
+import { BY_PLANTNAME } from '../../utils/queries';
 
 
-
+// search plants that are safe for animals - by plant name , filter plants database by safe to cats/dogs
 const Checkp = () => {
 
   const [value, setValue] = useState("");
@@ -21,12 +21,12 @@ const Checkp = () => {
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
      refetch()
-    console.log("search ", searchTerm);
+    
   };
 
-  console.log(data)
-  const plantInfo = data?.specificPlantS || []
 
+  const plantInfo = data?.specificPlantS || []
+///     returns result of the search and filter 
   return (
     <div className='checkp'> 
     <div className="App">
@@ -53,29 +53,7 @@ const Checkp = () => {
         </div>
         
       ))}
-      {/* <div className="dropdown">
-        {data
-          .filter((item) => {
-            const searchTerm = value.toLowerCase();
-            const fullName = item.full_name.toLowerCase();
-
-            return (
-              searchTerm &&
-              fullName.startsWith(searchTerm) &&
-              fullName !== searchTerm
-            );
-          })
-          .slice(0, 10)
-          .map((item) => (
-            <div
-              onClick={() => onSearch(item.full_name)}
-              className="dropdown-row"
-              key={item.full_name}
-            >
-              {item.full_name}
-            </div>
-          ))}
-      </div> */}
+      
     </div>
   </div>
   </div>

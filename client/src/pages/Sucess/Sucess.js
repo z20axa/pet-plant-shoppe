@@ -4,6 +4,9 @@ import { useMutation } from '@apollo/client';
 import { ADD_ORDER } from '../utils/mutations';
 // import { idbPromise } from '../utils/helpers';
 
+
+/// to be used to finsih stripe setup  - future 
+
  function Success() {
 const [addOrder] = useMutation(ADD_ORDER);
 

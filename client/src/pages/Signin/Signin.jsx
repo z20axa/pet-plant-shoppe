@@ -33,7 +33,7 @@ const Signin = () => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
-
+// check for valid 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     // check if form has everything (as per react-bootstrap docs)
@@ -95,10 +95,7 @@ const Signin = () => {
               ENTER
             </button>
 
-            {/* <span>If you have an account, please log in.</span>
-                        <button><Link style={{ textDecoration: 'none', color: 'white' }} to="/login">
-                            Login
-                        </Link></button> */}
+     
           </form>
           <span>If you have an account with us, please log in.</span>
           <button className="btn btn-primary btn-block py-3" type="submit">
