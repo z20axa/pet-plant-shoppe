@@ -22,8 +22,14 @@ const Profile = () => {
     return <Navigate to="/me" />;
   }
   if (!Auth.loggedIn()) {
-    return <h1>You must be logged in</h1>;
+    return <div className="logpic"><h9>You should be logged in to see more!</h9>          <img
+    src="/img/typing-cat.gif"
+    alt=""
+  />
+    </div>;
   }
+
+  
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -36,9 +42,11 @@ const Profile = () => {
     <div className="box">
 
       <h2 className="card-header">Hello {profile.username}!</h2>
-      <p> List of your Favorite Plants </p>
-      {profile.plant && profile.plant.map((plant) => plant.name)}
-
+      <p> Check the List of your Favorite Plants </p>
+      {profile.plant && profile.plant.map((plant,index) => (
+      <h5 key={index}>{plant.name}</h5>
+      )
+      )}
     </div>
   );
 };

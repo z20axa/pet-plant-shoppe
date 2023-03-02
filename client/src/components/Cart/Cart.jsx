@@ -6,7 +6,7 @@ import { QUERY_CHECKOUT } from "../../utils/queries";
 import { useSelector } from "react-redux";
 import { removeItem, resetCart } from "../../redux/cartReducer";
 import { useDispatch } from "react-redux";
-import { makeRequest } from "../../makeRequest";
+// import { makeRequest } from "../../makeRequest";
 import { loadStripe } from "@stripe/stripe-js";
 import auth from "../../utils/auth";
 
@@ -87,7 +87,7 @@ const Cart = () => {
         <span>${totalPrice()}</span>
       </div>
 
-      {auth.loggedIn() ? <button onClick={handlePayment}>PROCEED TO CHECKOUT</button> : <h1>PLEASE LOGIN TO CHECKOUT</h1>}
+      {auth.loggedIn() ? <button onClick={handlePayment}>PROCEED TO CHECKOUT</button> : <h7>PLEASE LOGIN TO CHECKOUT</h7>}
       <span className="reset" onClick={() => dispatch(resetCart())}>
         Reset Cart
       </span>
