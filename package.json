@@ -11,7 +11,8 @@
     "develop": "concurrently \"cd server && yarn run develop\" \"cd client && yarn start\"",
     "install": "cd server && yarn install && cd ../client && yarn install",
     "seed": "cd server && yarn run seed",
-    "build": "cd client && cross-env NODE_ENV=production yarn build"
+    "build": "cd client && cross-env NODE_ENV=production yarn build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn install --prefix client yarn run build --prefix client"
   },
   "keywords": [],
   "author": "",
