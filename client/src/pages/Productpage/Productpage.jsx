@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./Productpage.scss";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useParams, useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
 import { useQuery, useMutation } from "@apollo/client";
@@ -31,16 +31,16 @@ const Productpage = () => {
   async function addingToFave() {
     console.log("adding")
     console.log(auth.loggedIn())
-    if (auth.loggedIn() ){
+    if (auth.loggedIn()) {
       setButtonText("Adding")
-      await addFav({ variables: { plantId: plantInfo._id }} )
+      await addFav({ variables: { plantId: plantInfo._id } })
       setButtonText("Added")
     }
-    
+
     else {
-     navigate("/Signin");
+      navigate("/Signin");
     }
-    
+
   }
 
   // function addingToTheCart(){
@@ -53,7 +53,7 @@ const Productpage = () => {
   console.log(plantInfo);
   return (
     <div>
-      
+
       {loading ? (
         <h1>Loading...</h1>
       ) : (
@@ -73,26 +73,25 @@ const Productpage = () => {
               <h3>price : ${plantInfo.price}</h3></div>
           </div>
 
-          <div className="container">
-            <button className="plantc"
-              onClick={() => setQuantity((prev) => (prev === 1 ? 1 : prev - 1))}
-            >
-              -
-            </button>
-            {quantity}
-            <button className="plantc" onClick={() => setQuantity((prev) => prev + 1)}>+</button>
+          <div className="plus-minus-container">
+          <button className="plantc"
+            onClick={() => setQuantity((prev) => (prev === 1 ? 1 : prev - 1))}
+          >
+            -
+          </button>
+          {quantity}
+          <button className="plantc" onClick={() => setQuantity((prev) => prev + 1)}>+</button>
+
           </div>
-         <button 
+          <button
             className="add"
-             onClick={() => dispatch(addToCart({ plant: plantInfo, quantity }))}
-          > 
+            onClick={() => dispatch(addToCart({ plant: plantInfo, quantity }))}
+          >
             <AddShoppingCartIcon />
             ADD TO CART
-          </button> 
-          
-          
+          </button>
 
-          
+
           <div className="linked">
             <div className="itemto">
 
@@ -106,7 +105,7 @@ const Productpage = () => {
                   //   setButtonText("Add To Favorite");
                   // }, 1000);
                 }}>
-                  {error}
+                {error}
                 {buttonText}
               </button>
             </div>
