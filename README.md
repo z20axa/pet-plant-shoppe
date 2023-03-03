@@ -16,7 +16,7 @@ pet. In addition, we partner with SPCA so we can donate 50% of the sales when yo
 
 
 - [Mock-Up](#mock-up)
-- [Finished Product](#finished-product)
+- [Deployed App Link](#deployed-app-link)
 - [Credits](#credits)
 - [License](#license)
 
@@ -40,11 +40,9 @@ The following image shows the finished product
 
 ![The screenshot shows a  picture of list of favorite for the User.](/client/public/img/userfav.jpeg)
 
-## Finished-product
+## Deployed App Link
 
-Here is the link of the finished work: 
-
-[Deployed website](https://afternoon-coast-06929.herokuapp.com/)
+[Deployed App Link](https://afternoon-coast-06929.herokuapp.com/)
 
 
 ## Credits
